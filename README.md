@@ -1,2 +1,2 @@
 # sae102
-configuration du serveur DHCP sur le PC Rapetou en salle TP réseaux
+configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux
