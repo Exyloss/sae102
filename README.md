@@ -170,6 +170,6 @@ de Raspberry PI OS.
 
 Ressources :
 
-(Documentation Ubuntu isc-dhcp-server)[https://doc.ubuntu-fr.org/isc-dhcp-server]
+[Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
 
-(Afficher les baux des adresses IP)[https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address]
+[Lire les baux des adresses IP](https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address)
