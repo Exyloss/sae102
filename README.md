@@ -1,2 +1,140 @@
 # sae102
 configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux
+
+---
+
+# Sommaire
+
+1. Création de la VM
+2. Installation de Raspberry pi OS
+3. Branchements réalisés
+4. Configuration basique de la VM
+5. Installation et configuration de DHCP
+    1. Installation
+    2. Configuration
+6. Récupération de l'addresse IP de la Raspberry
+    1. Avec dhcpd.leases
+7. Connexion SSH
+
+---
+
+# 1. Création de la VM
+
+# 2. Installation de Raspberry pi OS
+
+![Configuration de la Raspberry sur rpi-imager](img/config-rpi.png)
+
+# 3. Branchements réalisés
+
+# 4. Configuration basique de la VM
+
+# 5. Installation et configuration de DHCP
+
+## 5.1. Installation
+
+Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu. En effet celui-ci retournait
+l'erreur suivante :
+
+![Capture d'écran de l'erreur renvoyée par apt](img/image1.png)
+
+Après quelques recherches, nous résolûmes cette erreur en rentrant la commande suivante :
+
+```bash
+sudo apt install --reinstall libappstream4
+```
+
+Alors, nous pouvons enfin mettre à jour les dépôts d'APT pour installer DHCP :
+
+```bash
+sudo apt update && sudo apt install isc-dhcp-server
+```
+
+## 5.2. Configuration
+
+Tout d'abord, pour permettre au Raspberry PI de sortir de son réseau local, nous devons
+transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
+la ligne ci-dessous dans le fichier «/etc/sysctl.conf» :
+
+```
+net.ipv4.ip_forward=1
+```
+
+Et recharger la configuration sysctl avec cette commande :
+
+```bash
+sudo sysctl -p
+```
+
+Désormais, nous allons configurer le serveur DHCP. Pour nous aider, nous avons utilisé la 
+[documentation Ubuntu du paquet isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server).
+Voici notre fichier de configuration «/etc/dhcp/dhcpd.conf» :
+
+```
+default-lease-time 600;
+max-lease-time 7200;
+
+subnet 192.168.36.0 netmask 255.255.255.0 {
+    range 192.168.36.2 192.168.36.254;
+    option routers 192.168.36.1;
+    option domain-name-servers 194.167.156.13;
+}
+```
+
+Les deux premières lignes de ce fichier signifie que le serveur DHCP attribuera une ip au client pour une durée de 600 secondes,
+et si le client renseigne lui-même cette valeur, celle-ci ne peut pas dépasser 7200 secondes. 
+Puis, les lignes restantes definissent l'adresse et le masque de réseau utilisés par le serveur, 
+les adresses du routeur et du DNS fournies aux clients et les adresses IP
+attribuables aux clients.
+
+Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, nous pouvons éditer le
+fichier «/etc/default/isc-dhcp-server» :
+
+```
+INTERFACESv4="ens4"
+```
+
+Enfin, nous pouvons lancer le service DHCP et l'activer au démarrage à l'aide de la commande suivante :
+
+```bash
+sudo systemctl enable --now isc-dhcp-server.service
+```
+
+# 6. Récupération de l'addresse IP de la Raspberry
+
+## 6.1. Avec dhcpd.leases
+
+Après avoir brancher la Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
+Nous pouvons la récupérer à l'aide du fichier des baux généré par isc-dhcp-server.
+Ce fichier est «/var/lib/dhcpd.leases» et ressemble à ceci :
+
+```
+lease 192.168.36.2 {
+  starts 2 2022/10/26 14:24:28;
+  ends 3 2022/10/26 19:24:28;
+   ...
+   hardware ethernet 01:11:5b:12:34:56;
+   ...
+   client-hostname "raspberrypi";
+}
+```
+
+On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après l'avoir connecté.
+Nous allons alors pouvoir nous connecter à la machine à l'aide de SSH.
+
+# 7. Connexion SSH
+
+Pour utiliser SSH, nous avons besoin de l'installer et de l'activer au démrrage :
+
+```bash
+sudo apt install ssh
+sudo systemctl enable --now sshd.service
+```
+
+Enfin, nous pouvons nous connecter à la Raspberry depuis le serveur DHCP à l'aide de cette commande :
+
+```bash
+ssh pi@192.168.36.2
+```
+
+La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
+de Raspberry pi OS.
