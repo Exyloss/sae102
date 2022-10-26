@@ -1,6 +1,6 @@
 # sae102
 
-configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux, Antonin PONS.
+Compte-rendu du SAE-12 de Antonin PONS.
 
 ---
 
