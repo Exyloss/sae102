@@ -168,7 +168,7 @@ ssh pi@192.168.36.2
 La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
 de Raspberry PI OS.
 
-Ressources :
+# Documents utiles
 
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
 
