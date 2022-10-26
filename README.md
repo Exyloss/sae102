@@ -6,7 +6,7 @@ configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux
 # Sommaire
 
 1. Création de la VM
-2. Installation de Raspberry pi OS
+2. Installation de Raspberry PI OS
 3. Branchements réalisés
 4. Configuration basique de la VM
 5. Installation et configuration de DHCP
@@ -20,23 +20,49 @@ configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux
 
 # 1. Création de la VM
 
-# 2. Installation de Raspberry pi OS
+# 2. Installation de Raspberry PI OS
 
-![Configuration de la Raspberry sur rpi-imager](img/config-rpi.png)
+Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
+fournit par Raspberry PI nommé «rpi-imager». Ce logiciel permet d'installer Raspberry PI OS 32 bits et de
+configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
+d'exploitation «Raspberry PI OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
+paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
+
+Paramètres à renseigner :
+
+```
+[X] Enable SSH
+    (X) Use password authentification
+    ( ) Allow public key authentification only
+[X] Set username and password
+    Username : pi
+    Password : **** (modifier selon l'envie)
+[ ] Configure wireless LAN
+[ ] Set locale settings
+```
 
 # 3. Branchements réalisés
 
 # 4. Configuration basique de la VM
 
+Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle comme étant celui de l'université :
+
+```bash
+export http_proxy="http://cache.univ-pau.fr:3128"
+export https_proxy="http://cache.univ-pau.fr:3128"
+```
+
+On peut vérifier le fonctionnement de notre configuration en pingant google.fr en IPv4 :
+
+```bash
+ping -4 google.fr
+```
+
 # 5. Installation et configuration de DHCP
 
 ## 5.1. Installation
 
-Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu. En effet celui-ci retournait
-l'erreur suivante :
-
-![Capture d'écran de l'erreur renvoyée par apt](img/image1.png)
-
+Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu (c.f. figure 2.).
 Après quelques recherches, nous résolûmes cette erreur en rentrant la commande suivante :
 
 ```bash
@@ -48,6 +74,8 @@ Alors, nous pouvons enfin mettre à jour les dépôts d'APT pour installer DHCP 
 ```bash
 sudo apt update && sudo apt install isc-dhcp-server
 ```
+
+![Capture d'écran de l'erreur renvoyée par apt](img/image1.png)
 
 ## 5.2. Configuration
 
@@ -119,7 +147,7 @@ lease 192.168.36.2 {
 ```
 
 On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après l'avoir connecté.
-Nous allons alors pouvoir nous connecter à la machine à l'aide de SSH.
+Nous allons alors pouvoir nous connecter à la Raspberry à l'aide de SSH.
 
 # 7. Connexion SSH
 
@@ -137,4 +165,4 @@ ssh pi@192.168.36.2
 ```
 
 La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
-de Raspberry pi OS.
+de Raspberry PI OS.
