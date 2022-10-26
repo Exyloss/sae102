@@ -1,4 +1,5 @@
 # sae102
+
 configuration du serveur DHCP pour le PC «Rapetou» en salle TP réseaux
 
 ---
@@ -62,7 +63,7 @@ ping -4 google.fr
 
 ## 5.1. Installation
 
-Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu (c.f. figure 2.).
+Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu (voir figure en fin de partie).
 Après quelques recherches, nous résolûmes cette erreur en rentrant la commande suivante :
 
 ```bash
