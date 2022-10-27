@@ -71,6 +71,8 @@ Paramètres à renseigner :
 
 # 3. Branchements réalisés
 
+Les câbles verts représentent les connexions préétablies.
+
 ![schéma des branchements réalisés](img/dessin.png)
 
 # 4. Configuration basique de la VM
