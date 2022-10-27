@@ -83,7 +83,7 @@ son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et so
 
 Ajouter capture d'écran
 
-La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que celle-ci
+La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que cette carte
 soit reliée à internet. Son masque et son DNS sont les mêmes que ceux de bridge1.
 
 Ajouter capture d'écran
