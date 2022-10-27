@@ -77,6 +77,17 @@ Ne pas utiliser virtio [ ]
 
 ```
 
+Puis, nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte bridge1 possède une
+adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la prise chromée afin d'accéder à internet. Ainsi,
+son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
+
+Ajouter capture d'écran
+
+La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que celle-ci
+soit reliée à internet. Son masque et son DNS sont les mêmes que ceux de bridge1.
+
+Ajouter capture d'écran
+
 Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle comme étant celui de l'université :
 
 ```bash
