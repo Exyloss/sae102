@@ -23,35 +23,6 @@ Compte-rendu du SAE-12 de Antonin PONS.
 
 # 1. Création de la VM
 
-à completer
-
-# 2. Installation de Raspberry PI OS
-
-Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
-fournit par Raspberry PI nommé «rpi-imager». Ce logiciel permet d'installer Raspberry PI OS 32 bits et de
-configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
-d'exploitation «Raspberry PI OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
-paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
-
-Paramètres à renseigner :
-
-```
-[X] Enable SSH
-    (X) Use password authentification
-    ( ) Allow public key authentification only
-[X] Set username and password
-    Username : pi
-    Password : **** (modifier selon l'envie)
-[ ] Configure wireless LAN
-[ ] Set locale settings
-```
-
-# 3. Branchements réalisés
-
-à completer
-
-# 4. Configuration basique de la VM
-
 Configuration de la VM sur vi4rt.univ-pau.fr :
 
 ```
@@ -77,7 +48,34 @@ Ne pas utiliser virtio [ ]
 
 ```
 
-Puis, nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte bridge1 possède une
+# 2. Installation de Raspberry PI OS
+
+Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
+fournit par Raspberry PI nommé «rpi-imager». Ce logiciel permet d'installer Raspberry PI OS 32 bits et de
+configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
+d'exploitation «Raspberry PI OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
+paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
+
+Paramètres à renseigner :
+
+```
+[X] Enable SSH
+    (X) Use password authentification
+    ( ) Allow public key authentification only
+[X] Set username and password
+    Username : pi
+    Password : **** (modifier selon l'envie)
+[ ] Configure wireless LAN
+[ ] Set locale settings
+```
+
+# 3. Branchements réalisés
+
+![schéma des branchements réalisés](img/dessin.png)
+
+# 4. Configuration basique de la VM
+
+Nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte bridge1 possède une
 adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la prise chromée afin d'accéder à internet. Ainsi,
 son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
 
