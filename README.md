@@ -15,6 +15,7 @@ Compte-rendu du SAE-12 de Antonin PONS.
     2. Configuration
 6. Récupération de l'addresse IP de la Raspberry
     1. Avec dhcpd.leases
+    2. Avec nmap
 7. Connexion SSH
 
 ---
@@ -149,6 +150,20 @@ lease 192.168.36.2 {
 
 On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après l'avoir connecté.
 Nous allons alors pouvoir nous connecter à la Raspberry à l'aide de SSH.
+
+## 6.2. Avec nmap
+
+Installer nmap :
+
+```bash
+sudo apt install nmap net-tools
+```
+
+Utiliser nmap avec la commande suivante :
+
+```bash
+nmap -sP 192.168.36.0/24
+```
 
 # 7. Connexion SSH
 
