@@ -222,3 +222,7 @@ de Raspberry PI OS.
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
 
 [Lire les baux des adresses IP](https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address)
+
+[Acceder à internet depuis le client (1)](https://unix.stackexchange.com/questions/498895/dhcp-client-doesnt-have-internet-but-can-ping-gateway)
+
+[Acceder à internet depuis le client (2)](https://serverfault.com/questions/525671/computer-gets-ip-from-dhcp-server-but-has-no-internet-connection)
