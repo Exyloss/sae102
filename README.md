@@ -81,12 +81,40 @@ Puis, nous avons configuré les paramètres de réseau des deux cartes de la mac
 adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la prise chromée afin d'accéder à internet. Ainsi,
 son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
 
-Ajouter capture d'écran
+```
+Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
+                (X) Manuel              ( ) Désactiver
 
-La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que cette carte
+Adresses
+
+|=============================================|
+|   Adresse   | Masque de réseau | Passerelle |
+| 10.2.18.36  |  255.255.255.0   | 10.2.18.1  |
+|=============================================|
+
+DNS
+
+[194.167.156.13]
+```
+
+La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que celle-ci
 soit reliée à internet. Son masque et son DNS sont les mêmes que ceux de bridge1.
 
-Ajouter capture d'écran
+```
+Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
+                (X) Manuel              ( ) Désactiver
+
+Adresses
+
+|=============================================|
+|   Adresse   | Masque de réseau | Passerelle |
+|192.168.36.1 |  255.255.255.0   | 10.2.18.36 |
+|=============================================|
+
+DNS
+
+[194.167.156.13]
+```
 
 Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle comme étant celui de l'université :
 
@@ -118,7 +146,7 @@ Alors, nous pouvons enfin mettre à jour les dépôts d'APT pour installer DHCP 
 sudo apt update && sudo apt install isc-dhcp-server
 ```
 
-![Capture d'écran de l'erreur renvoyée par apt](img/image1.png)
+![Capture d'écran de l'erreur renvoyée par apt](img/capture-erreur-apt.png)
 
 ## 5.2. Configuration
 
