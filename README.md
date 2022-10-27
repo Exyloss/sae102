@@ -7,7 +7,7 @@ Compte-rendu du SAE-12 de Antonin PONS.
 # Sommaire
 
 1. Création de la VM
-2. Installation de Raspberry PI OS
+2. Installation de Raspberry Pi OS
 3. Branchements réalisés
 4. Configuration basique de la VM
 5. Installation et configuration de DHCP
@@ -48,12 +48,12 @@ Ne pas utiliser virtio [ ]
 
 ```
 
-# 2. Installation de Raspberry PI OS
+# 2. Installation de Raspberry Pi OS
 
 Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
-fournit par Raspberry PI nommé «rpi-imager». Ce logiciel permet d'installer Raspberry PI OS 32 bits et de
+fournit par Raspberry Pi nommé «rpi-imager». Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
 configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
-d'exploitation «Raspberry PI OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
+d'exploitation «Raspberry Pi OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
 paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
 
 Paramètres à renseigner :
@@ -150,7 +150,7 @@ sudo apt update && sudo apt install isc-dhcp-server
 
 ## 5.2. Configuration
 
-Tout d'abord, pour permettre au Raspberry PI de sortir de son réseau local, nous devons
+Tout d'abord, pour permettre au Raspberry Pi de sortir de son réseau local, nous devons
 transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
 la ligne ci-dessous dans le fichier «/etc/sysctl.conf» :
 
@@ -250,7 +250,7 @@ ssh pi@192.168.36.2
 ```
 
 La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
-de Raspberry PI OS.
+de Raspberry Pi OS.
 
 # 8. Accéder à internet depuis la Raspberry
 
