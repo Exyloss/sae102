@@ -17,10 +17,13 @@ Compte-rendu du SAE-12 de Antonin PONS.
     1. Avec dhcpd.leases
     2. Avec nmap
 7. Connexion SSH
+8. Accéder à internet depuis la Raspberry
 
 ---
 
 # 1. Création de la VM
+
+à completer
 
 # 2. Installation de Raspberry PI OS
 
@@ -45,7 +48,34 @@ Paramètres à renseigner :
 
 # 3. Branchements réalisés
 
+à completer
+
 # 4. Configuration basique de la VM
+
+Configuration de la VM sur vi4rt.univ-pau.fr :
+
+```
+Nouvelle machine virtuelle
+
+Nom de la machine   ubuntu
+Disque dur          Ubuntu 18.04 (15.00Go)
+Lecteur CD/DVD      Vide
+Lecteur CD/DVD 2    Vide
+Booster sur le      [ ]
+         CDROM
+Processeur(s)       2 vcpus
+Memoire vive        2G
+Cartes reseaux      2
+Carte 1 attachee a  bridge1
+Carte 2 attachee a  pass1
+Dupliquer le port   [ ]
+serie dans la VM
+
+Options avancées (utiliser en connaissance de causes)
+
+Ne pas utiliser virtio [ ]
+
+```
 
 Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle comme étant celui de l'université :
 
@@ -182,6 +212,10 @@ ssh pi@192.168.36.2
 
 La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
 de Raspberry PI OS.
+
+# 8. Accéder à internet depuis la Raspberry
+
+à completer
 
 # Documents utiles
 
