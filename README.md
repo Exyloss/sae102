@@ -239,7 +239,7 @@ nmap -sP 192.168.36.0/24
 
 Cette commande donne le résultat suivant :
 
-```bash
+```
 root@ubuntu:~# nmap -sP 192.168.36.0/24
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2022-11-16 11:12 CET
