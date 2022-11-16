@@ -237,6 +237,20 @@ Utiliser nmap avec la commande suivante :
 nmap -sP 192.168.36.0/24
 ```
 
+Cette commande donne le résultat suivant :
+
+```bash
+root@ubuntu:~# nmap -sP 192.168.36.0/24
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2022-11-16 11:12 CET
+Nmap scan report for 192.168.36.3
+Host is up (0.00063s latency).
+MAC Address: 08:8F:C3:2F:55:22 (Unknown)
+Nmap scan report for ubuntu (192.168.36.1)
+Host is up.
+Nmap done: 256 IP addresses (2 hosts up) scanned in 3.75 seconds
+```
+
 # 7. Connexion SSH
 
 Pour utiliser SSH, nous avons besoin de l'installer et de l'activer au démrrage :
