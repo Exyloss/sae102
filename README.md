@@ -207,13 +207,16 @@ Nous pouvons la récupérer à l'aide du fichier des baux généré par isc-dhcp
 Ce fichier est «/var/lib/dhcpd.leases» et ressemble à ceci :
 
 ```
-lease 192.168.36.2 {
-  starts 2 2022/10/26 14:24:28;
-  ends 3 2022/10/26 19:24:28;
-   ...
-   hardware ethernet 01:11:5b:12:34:56;
-   ...
-   client-hostname "raspberrypi";
+lease 192.168.36.3 {
+  starts 3 2022/11/16 10:09:52;
+  ends 3 2022/11/16 10:19:52;
+  cltt 3 2022/11/16 10:09:52;
+  binding state active;
+  next binding state free;
+  rewind binding state free;
+  hardware ethernet 08:8f:c3:2f:55:22;
+  uid "\001\010\217\303/U\"";
+  client-hostname "archlinux";
 }
 ```
 
