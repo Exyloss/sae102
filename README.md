@@ -106,8 +106,18 @@ ssh-keygen -b 4096
 
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
-Ensuite, il faut copier la clef publique présente par défaut ici : ~/.ssh/id_rsa.pub dans le répertoire «/mnt/etc/ssh».
+Ensuite, il faut copier la clef publique présente par défaut ici : ~/.ssh/id_rsa.pub dans le répertoire «/mnt/etc/ssh». Alors, nous pouvons
+ajouter la ligne suivante au fichier /etc/ssh/sshd_config :
 
+```
+AuthorizedKeysFile /etc/ssh/id_rsa.pub
+```
+
+enfin, nous pouvons démonter la carte SD du répertoire /mnt :
+
+```bash
+sudo umount -R /mnt
+```
 
 # 3. Branchements réalisés
 
@@ -324,6 +334,13 @@ ssh pi@192.168.36.2
 
 La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
 de Raspberry Pi OS.
+
+Si nous avons configuré le Raspberry Pi depuis le terminal de notre ordinateur, nous pouvons nous connecter en ssh avec la clef privée
+à l'aide de cette commande ssh :
+
+```bash
+ssh -i ~/.ssh/id_rsa pi@192.168.36.2
+```
 
 # 8. Accéder à internet depuis la Raspberry
 
