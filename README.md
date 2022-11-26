@@ -8,6 +8,8 @@ Compte-rendu du SAE-12 de Antonin PONS.
 
 1. Création de la VM
 2. Installation de Raspberry Pi OS
+    1. En utilisant RPi-imager
+    2. A l'aide du terminal
 3. Branchements réalisés
 4. Configuration basique de la VM
 5. Installation et configuration de DHCP
@@ -49,7 +51,7 @@ Ne pas utiliser virtio [ ]
 
 ```
 
-# 2. Installation de Raspberry Pi OS
+# 2.1. Installation de Raspberry Pi OS
 
 Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
 fournit par Raspberry Pi nommé «rpi-imager». Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
@@ -69,6 +71,43 @@ Paramètres à renseigner :
 [ ] Configure wireless LAN
 [ ] Set locale settings
 ```
+
+# 2.2 A l'aide du terminal
+
+Pour cette partie, nous allons installer et configurer Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
+image de Raspberry Pi OS (ici)[https://www.raspberrypi.com/software/operating-systems/] en sélectionnant «Raspberry Pi OS with desktop». 
+
+Ensuite,
+nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme unxz en lui donnant comme argument le fichier compressé en 
+XZ. 
+
+Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
+
+```bash
+sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress conv=fsync
+```
+
+A expliquer
+
+Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD à notre ordinateur :
+
+```bash
+sudo mount /dev/sdb2 /mnt
+sudo mount /dev/sdb1 /mnt/boot
+```
+
+Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé «ssh» dans le répertoire /mnt/boot. Cependant la configuration de ssh n'est pas terminée. En effet, l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
+celui-ci. Nous allons donc devoir générer un couple de clefs RSA afin de se connecter à l'aide de la clef privée. Sur notre ordinateur, 
+nous allons génerer les clefs à l'aide de la commande suivante :
+
+```bash
+ssh-keygen -b 4096
+```
+
+Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
+
+Ensuite, il faut copier la clef publique présente par défaut ici : ~/.ssh/id_rsa.pub dans le répertoire «/mnt/etc/ssh».
+
 
 # 3. Branchements réalisés
 
