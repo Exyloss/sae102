@@ -1,0 +1,13 @@
+auto ens3
+    iface ens3 inet static
+    address 10.2.18.36
+    netmask 255.255.255.0
+    gateway 10.2.18.1
+    dns-nameservers 194.167.156.13
+
+auto ens4
+    iface ens4 inet static
+    address 192.168.36.1
+    netmask 255.255.255.0
+    gateway 10.2.18.1
+    dns-nameservers 194.167.156.13
