@@ -16,6 +16,7 @@ Compte-rendu du SAE-12 de Antonin PONS.
 6. Récupération de l'addresse IP de la Raspberry
     1. Avec dhcpd.leases
     2. Avec nmap
+    3. Avec fping
 7. Connexion SSH
 8. Accéder à internet depuis la Raspberry
 
@@ -207,7 +208,7 @@ Nous pouvons la récupérer à l'aide du fichier des baux généré par isc-dhcp
 Ce fichier est «/var/lib/dhcpd.leases» et ressemble à ceci :
 
 ```
-lease 192.168.36.3 {
+lease 192.168.36.2 {
   starts 3 2022/11/16 10:09:52;
   ends 3 2022/11/16 10:19:52;
   cltt 3 2022/11/16 10:09:52;
@@ -243,12 +244,28 @@ Cette commande donne le résultat suivant :
 root@ubuntu:~# nmap -sP 192.168.36.0/24
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2022-11-16 11:12 CET
-Nmap scan report for 192.168.36.3
+Nmap scan report for 192.168.36.2
 Host is up (0.00063s latency).
 MAC Address: 08:8F:C3:2F:55:22 (Unknown)
 Nmap scan report for ubuntu (192.168.36.1)
 Host is up.
 Nmap done: 256 IP addresses (2 hosts up) scanned in 3.75 seconds
+```
+
+## 6.3. Avec fping
+
+Installer fping :
+
+```bash
+sudo apt install fping
+```
+
+Utiliser fping avec la commande suivante :
+
+```
+root@ubuntu:~# fping -g 192.168.36.0/24 -q -a
+192.168.36.1
+192.168.36.2
 ```
 
 # 7. Connexion SSH
@@ -284,3 +301,5 @@ de Raspberry Pi OS.
 [Acceder à internet depuis le client (2)](https://serverfault.com/questions/525671/computer-gets-ip-from-dhcp-server-but-has-no-internet-connection)
 
 [Utiliser nmap](https://wiki.archlinux.org/title/Nmap)
+
+[Utiliser fping](https://fping.org/fping.1.html)
