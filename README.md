@@ -77,7 +77,7 @@ Paramètres à renseigner :
 ## 2.2 A l'aide du terminal
 
 Pour cette partie, nous allons installer et configurer Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
-image de Raspberry Pi OS (ici)[https://www.raspberrypi.com/software/operating-systems/] en sélectionnant «Raspberry Pi OS with desktop». 
+image de Raspberry Pi OS [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS with desktop». 
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme unxz en lui donnant comme argument le fichier compressé en 
