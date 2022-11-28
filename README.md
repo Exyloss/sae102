@@ -51,7 +51,9 @@ Ne pas utiliser virtio [ ]
 
 ```
 
-# 2.1. Installation de Raspberry Pi OS
+# 2. Installation de Raspberry Pi OS
+
+## 2.1. Installation de Raspberry Pi OS
 
 Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
 fournit par Raspberry Pi nommé «rpi-imager». Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
@@ -72,7 +74,7 @@ Paramètres à renseigner :
 [ ] Set locale settings
 ```
 
-# 2.2 A l'aide du terminal
+## 2.2 A l'aide du terminal
 
 Pour cette partie, nous allons installer et configurer Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
 image de Raspberry Pi OS (ici)[https://www.raspberrypi.com/software/operating-systems/] en sélectionnant «Raspberry Pi OS with desktop». 
