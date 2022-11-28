@@ -107,7 +107,7 @@ ssh-keygen -b 4096
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
 Ensuite, il faut copier la clef publique présente par défaut ici : ~/.ssh/id_rsa.pub dans le répertoire «/mnt/etc/ssh». Alors, nous pouvons
-ajouter la ligne suivante au fichier /etc/ssh/sshd_config :
+ajouter la ligne suivante au fichier /mnt/etc/ssh/sshd_config :
 
 ```
 AuthorizedKeysFile /etc/ssh/id_rsa.pub
@@ -118,6 +118,8 @@ enfin, nous pouvons démonter la carte SD du répertoire /mnt :
 ```bash
 sudo umount -R /mnt
 ```
+
+Note : le -R permet de démonter la carte SD récursivement.
 
 # 3. Branchements réalisés
 
