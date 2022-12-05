@@ -127,7 +127,7 @@ Note : le -R permet de démonter la carte SD récursivement.
 
 Les câbles verts représentent les connexions préétablies.
 
-![schéma des branchements réalisés](img/dessin.png)
+![schéma des branchements réalisés](img/dessin.jpg)
 
 # 4. Configuration basique de la VM
 
