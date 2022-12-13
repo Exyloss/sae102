@@ -15,6 +15,10 @@ output: pdf_document
     2. A l'aide du terminal
 3. Branchements réalisés
 4. Configuration basique de la VM
+    1. Paramétrage des cartes réseau
+        1. Par l'interface graphique
+        2. Par le terminal
+    2. Accès à internet
 5. Installation et configuration de DHCP
     1. Installation
     2. Configuration
@@ -24,6 +28,7 @@ output: pdf_document
     3. Avec fping
 7. Connexion SSH
 8. Accéder à internet depuis la Raspberry
+9. Capteur ???
 
 ---
 
@@ -134,6 +139,10 @@ Les câbles verts représentent les connexions préétablies.
 
 # 4. Configuration basique de la VM
 
+## 4.1. Paramétrage des cartes réseau
+
+### 4.1.1. Depuis l'interface graphique
+
 Nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte bridge1 possède une
 adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la prise chromée afin d'accéder à internet. Ainsi,
 son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
@@ -171,7 +180,13 @@ DNS
 [194.167.156.13]
 ```
 
-Enfin, pour utiliser le protocol HTTP sur internet, nous devons définir le proxy utilisé par la machine virtuelle 
+### 4.1.2. Depuis le terminal
+
+...
+
+## 4.2. Accès à internet
+
+Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle 
 comme étant celui de l'université :
 
 ```bash
@@ -179,7 +194,7 @@ export http_proxy="http://cache.univ-pau.fr:3128"
 export https_proxy="http://cache.univ-pau.fr:3128"
 ```
 
-On peut vérifier le fonctionnement de notre configuration en pingant _archlinux.org_ en IPv4 :
+On peut vérifier le fonctionnement de notre configuration en pingant par exemple _archlinux.org_ en IPv4 :
 
 ```bash
 ping -4 archlinux.org
@@ -378,3 +393,5 @@ Explication de la commande :
 [Utiliser nmap](https://wiki.archlinux.org/title/Nmap)
 
 [Utiliser fping](https://fping.org/fping.1.html)
+
+[Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
