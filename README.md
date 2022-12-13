@@ -182,7 +182,9 @@ DNS
 
 ### 4.1.2. Depuis le terminal
 
-...
+Il est aussi possible de configurer les cartes réseau depuis le terminal à l'aide de la commande `nmcli` du logiciel NetworkManager.
+Cet outil en ligne de commande permet alors d'automatiser la configuration des cartes réseau en renseignant les commandes à éxecuter dans
+un script bash.
 
 ## 4.2. Accès à internet depuis la VM
 
