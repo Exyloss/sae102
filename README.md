@@ -360,7 +360,7 @@ iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 
 Explication de la commande :
 
- - La valeur _POSTROUTING_ de l'option -A permet l'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface.
+ - La valeur _POSTROUTING_ de l'option -A permet d'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface _ens3_.
  - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet passe par la passerelle.
  - L'argument ens3 de l'option -o est le nom de la carte réseau de sortie des paquets
  - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des datagrammes et de les modifier afin de changer leur IP sourcelors de leur envoi.
