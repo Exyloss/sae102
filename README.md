@@ -179,10 +179,10 @@ export http_proxy="http://cache.univ-pau.fr:3128"
 export https_proxy="http://cache.univ-pau.fr:3128"
 ```
 
-On peut vérifier le fonctionnement de notre configuration en pingant google.fr en IPv4 :
+On peut vérifier le fonctionnement de notre configuration en pingant _archlinux.org_ en IPv4 :
 
 ```bash
-ping -4 google.fr
+ping -4 archlinux.org
 ```
 
 # 5. Installation et configuration de DHCP
@@ -220,7 +220,7 @@ Et recharger la configuration sysctl avec cette commande :
 sudo sysctl -p
 ```
 
-Désormais, nous allons configurer le serveur DHCP. Pour nous aider, nous avons utilisé la 
+Désormais, nous allons configurer le serveur DHCP. Pour m'aider, j'ai utilisé la 
 [documentation Ubuntu du paquet isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server).
 Voici notre fichier de configuration «/etc/dhcp/dhcpd.conf» :
 
@@ -235,7 +235,7 @@ subnet 192.168.36.0 netmask 255.255.255.0 {
 }
 ```
 
-Les deux premières lignes de ce fichier signifie que le serveur DHCP attribuera une ip au client pour une durée de 600 secondes,
+Les deux premières lignes de ce fichier indiquent que le serveur DHCP attribuera une ip au client pour une durée de 600 secondes,
 et si le client renseigne lui-même cette valeur, celle-ci ne peut pas dépasser 7200 secondes. 
 Puis, les lignes restantes definissent l'adresse et le masque de réseau utilisés par le serveur, 
 les adresses du routeur et du DNS fournies aux clients et les adresses IP
@@ -277,7 +277,6 @@ lease 192.168.36.2 {
 ```
 
 On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après l'avoir connecté.
-Nous allons alors pouvoir nous connecter à la Raspberry à l'aide de SSH.
 
 ## 6.2. Avec nmap
 
@@ -338,11 +337,11 @@ Enfin, nous pouvons nous connecter à la Raspberry depuis le serveur DHCP à l'a
 ssh pi@192.168.36.2
 ```
 
-La commande ci-dessus va nous demander de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation
-de Raspberry Pi OS.
+Cette commande permet d'ouvrir un shell sécurisé en tant que _pi_ sur la machine ayant comme addresse IP 192.168.36.1. SSH demande
+ensuite de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation de Raspberry Pi OS.
 
-Si nous avons configuré le Raspberry Pi depuis le terminal de notre ordinateur, nous pouvons nous connecter en ssh avec la clef privée
-à l'aide de cette commande ssh :
+Si le Raspberry Pi a été configuré depuis le terminal, il faut se connecter en ssh à l'aide de la clef privée
+en utilisant cette commande :
 
 ```bash
 ssh -i ~/.ssh/id_rsa pi@192.168.36.2
@@ -359,7 +358,14 @@ Pour ce faire, j'ai décidé d'utiliser la commande `iptables` comme ceci :
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 ```
 
-ens3 étant la carte réseau de sortie.
+Explication de la commande :
+
+ - La valeur _POSTROUTING_ de l'option -A permet l'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface.
+ - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet passe par la passerelle.
+ - L'argument ens3 de l'option -o est le nom de la carte réseau de sortie des paquets
+ - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des datagrammes et de les modifier afin de changer leur IP sourcelors de leur envoi.
+   Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées établies pour voir si le datagramme appartient affectivement
+   à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet a réseau local.
 
 # Documents utiles
 
