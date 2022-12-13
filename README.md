@@ -298,7 +298,7 @@ On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspber
 Installer nmap :
 
 ```bash
-sudo apt install nmap net-tools
+sudo apt install nmap
 ```
 
 Utiliser nmap avec la commande suivante :
