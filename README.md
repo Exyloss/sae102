@@ -1,7 +1,10 @@
-# sae102
-
-Compte-rendu du SAE-12 de Antonin PONS.
-
+---
+title: "Compte-rendu de la SAE-12"
+author: Antonin PONS
+date: 13 Décembre 2022
+geometry: margin=2cm
+output: pdf_document
+---
 ---
 
 # Sommaire
@@ -89,7 +92,7 @@ Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande
 sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress conv=fsync
 ```
 
-A expliquer
+
 
 Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée au disque _/dev/sdb_) à notre ordinateur :
 
@@ -141,10 +144,11 @@ Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
 
 Adresses
 
-|=============================================|
-|   Adresse   | Masque de réseau | Passerelle |
-| 10.2.18.36  |  255.255.255.0   | 10.2.18.1  |
-|=============================================|
+===========================================
+|Adresse     |Masque de réseau |Passerelle|
+|------------|-----------------|----------|
+|10.2.18.36  |255.255.255.0    | 10.2.18.1|
+===========================================
 
 DNS
 
@@ -170,7 +174,8 @@ DNS
 [194.167.156.13]
 ```
 
-Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle comme étant celui de l'université :
+Enfin, pour utiliser le protocol HTTP sur internet, nous devons définir le proxy utilisé par la machine virtuelle 
+comme étant celui de l'université :
 
 ```bash
 export http_proxy="http://cache.univ-pau.fr:3128"
@@ -270,7 +275,7 @@ lease 192.168.36.2 {
   rewind binding state free;
   hardware ethernet 08:8f:c3:2f:55:22;
   uid "\001\010\217\303/U\"";
-  client-hostname "raspberry";
+  client-hostname "raspberrypi";
 }
 ```
 
