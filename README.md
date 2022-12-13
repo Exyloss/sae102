@@ -363,9 +363,9 @@ Explication de la commande :
  - La valeur _POSTROUTING_ de l'option -A permet d'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface _ens3_.
  - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet passe par la passerelle.
  - L'argument ens3 de l'option -o est le nom de la carte réseau de sortie des paquets
- - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des datagrammes et de les modifier afin de changer leur IP sourcelors de leur envoi.
+ - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des datagrammes et de les modifier afin de changer leur IP source lors de leur envoi.
    Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées établies pour voir si le datagramme appartient affectivement
-   à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet a réseau local.
+   à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet au réseau local.
 
 # Documents utiles
 
