@@ -53,7 +53,7 @@ Ne pas utiliser virtio [ ]
 
 # 2. Installation de Raspberry Pi OS
 
-## 2.1. Installation de Raspberry Pi OS
+## 2.1. Avec RPi-imager
 
 Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
 fournit par Raspberry Pi nommé «rpi-imager». Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
@@ -348,7 +348,16 @@ ssh -i ~/.ssh/id_rsa pi@192.168.36.2
 
 # 8. Accéder à internet depuis la Raspberry
 
-à completer
+Pour que la Raspberry ait accès à internet, on doit transformer notre passerelle / serveur DHCP en passerelle NAT afin que l'addresse IP de
+la Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du réseau local.
+
+Pour ce faire, j'ai décidé d'utiliser la commande `iptables` comme ceci :
+
+```bash
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+```
+
+ens3 étant la carte réseau de sortie.
 
 # Documents utiles
 
