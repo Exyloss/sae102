@@ -91,7 +91,7 @@ sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M s
 
 A expliquer
 
-Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD à notre ordinateur :
+Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée au disque _/dev/sdb_) à notre ordinateur :
 
 ```bash
 sudo mount /dev/sdb2 /mnt
