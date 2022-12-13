@@ -18,7 +18,7 @@ output: pdf_document
     1. Paramétrage des cartes réseau
         1. Par l'interface graphique
         2. Par le terminal
-    2. Accès à internet
+    2. Accès à internet depuis la VM
 5. Installation et configuration de DHCP
     1. Installation
     2. Configuration
@@ -184,7 +184,7 @@ DNS
 
 ...
 
-## 4.2. Accès à internet
+## 4.2. Accès à internet depuis la VM
 
 Enfin, pour accéder à internet, nous devons définir le proxy utilisé par la machine virtuelle 
 comme étant celui de l'université :
