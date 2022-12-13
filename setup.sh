@@ -9,3 +9,4 @@ sudo echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sudo sysctl -p
 sudo systemctl restart networking
 sudo systemctl restart isc-dhcp-server
+sudo iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
