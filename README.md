@@ -56,7 +56,7 @@ Ne pas utiliser virtio [ ]
 ## 2.1. Avec RPi-imager
 
 Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
-fournit par Raspberry Pi nommé «rpi-imager». Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
+fournit par Raspberry Pi nommé `rpi-imager`. Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
 configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
 d'exploitation «Raspberry Pi OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
 paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
@@ -80,7 +80,7 @@ Pour cette partie, nous allons installer et configurer Raspberry Pi OS à l'aide
 image de Raspberry Pi OS [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS with desktop». 
 
 Ensuite,
-nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme unxz en lui donnant comme argument le fichier compressé en 
+nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui donnant comme argument le fichier compressé en 
 XZ. 
 
 Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
@@ -98,7 +98,7 @@ sudo mount /dev/sdb2 /mnt
 sudo mount /dev/sdb1 /mnt/boot
 ```
 
-Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé «ssh» dans le répertoire /mnt/boot. Cependant la configuration de ssh n'est pas terminée. En effet, l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
+Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé _ssh_ dans le répertoire _/mnt/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
 celui-ci. Nous allons donc devoir générer un couple de clefs RSA afin de se connecter à l'aide de la clef privée. Sur notre ordinateur, 
 nous allons génerer les clefs à l'aide de la commande suivante :
 
@@ -108,8 +108,8 @@ ssh-keygen -b 4096
 
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
-Ensuite, il faut copier la clef publique présente par défaut ici : ~/.ssh/id_rsa.pub dans le répertoire «/mnt/etc/ssh». Alors, nous pouvons
-ajouter la ligne suivante au fichier /mnt/etc/ssh/sshd_config :
+Ensuite, il faut copier la clef publique présente par défaut ici : _~/.ssh/id_rsa.pub_ dans le répertoire _/mnt/etc/ssh_. Alors, nous pouvons
+ajouter la ligne suivante au fichier _/mnt/etc/ssh/sshd_config_ :
 
 ```
 AuthorizedKeysFile /etc/ssh/id_rsa.pub
@@ -206,7 +206,7 @@ sudo apt update && sudo apt install isc-dhcp-server
 
 Tout d'abord, pour permettre au Raspberry Pi de sortir de son réseau local, nous devons
 transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
-la ligne ci-dessous dans le fichier «/etc/sysctl.conf» :
+la ligne ci-dessous dans le fichier _/etc/sysctl.conf_ :
 
 ```
 net.ipv4.ip_forward=1
@@ -240,7 +240,7 @@ les adresses du routeur et du DNS fournies aux clients et les adresses IP
 attribuables aux clients.
 
 Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, nous pouvons éditer le
-fichier «/etc/default/isc-dhcp-server» :
+fichier _/etc/default/isc-dhcp-server_ :
 
 ```
 INTERFACESv4="ens4"
@@ -257,8 +257,8 @@ sudo systemctl enable --now isc-dhcp-server.service
 ## 6.1. Avec dhcpd.leases
 
 Après avoir brancher la Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
-Nous pouvons la récupérer à l'aide du fichier des baux généré par isc-dhcp-server.
-Ce fichier est «/var/lib/dhcpd.leases» et ressemble à ceci :
+Nous pouvons la récupérer à l'aide du fichier des baux généré par `isc-dhcp-server`.
+Ce fichier est _/var/lib/dhcpd.leases_ et ressemble à ceci :
 
 ```
 lease 192.168.36.2 {
@@ -270,7 +270,7 @@ lease 192.168.36.2 {
   rewind binding state free;
   hardware ethernet 08:8f:c3:2f:55:22;
   uid "\001\010\217\303/U\"";
-  client-hostname "archlinux";
+  client-hostname "raspberry";
 }
 ```
 
