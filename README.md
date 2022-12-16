@@ -84,7 +84,7 @@ Paramètres à renseigner :
 
 ## 2.2 A l'aide du terminal
 
-Pour cette partie, nous allons installer et configurer Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
+Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
 image de Raspberry Pi OS [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS with desktop». 
 
 Ensuite,
@@ -241,7 +241,7 @@ sudo apt update && sudo apt install isc-dhcp-server
 
 Désormais, nous allons configurer le serveur DHCP. Pour m'aider, j'ai utilisé la 
 [documentation Ubuntu du paquet isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server).
-Voici notre fichier de configuration «/etc/dhcp/dhcpd.conf» :
+Voici le contenu du fichier de configuration _/etc/dhcp/dhcpd.conf_ :
 
 ```
 default-lease-time 600;
@@ -260,7 +260,7 @@ Puis, les lignes restantes definissent l'adresse et le masque de réseau utilis�
 les adresses du routeur et du DNS fournies aux clients et les adresses IP
 attribuables aux clients.
 
-Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, nous pouvons éditer le
+Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, en peut éditer le
 fichier _/etc/default/isc-dhcp-server_ :
 
 ```
@@ -406,7 +406,7 @@ Explication de la commande :
  - La valeur _POSTROUTING_ de l'option -A permet d'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface _ens3_.
  - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet passe par la passerelle.
  - L'argument ens3 de l'option -o est le nom de la carte réseau de sortie des paquets
- - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des datagrammes et de les modifier afin de changer leur IP source lors de leur envoi.
+ - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des paquets tranférés et de les modifier afin de changer leur IP source lors de leur envoi.
    Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées établies pour voir si le datagramme appartient affectivement
    à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet au réseau local.
 
