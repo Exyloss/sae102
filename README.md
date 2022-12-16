@@ -187,8 +187,10 @@ un script bash.
 Pour modifier la configuration réseau des cartes réseau, on peut utiliser ces commandes :
 
 ```bash
-nmcli con mod Connexion\ filaire\ 1 ipv4.addresses 10.2.18.36/24 ipv4.gateway 10.2.18.1 ipv4.dns 194.167.156.13 ipv4.method manual
-nmcli con mod Connexion\ filaire\ 2 ipv4.addresses 192.168.36.1/24 ipv4.gateway 10.2.18.36 ipv4.dns 194.167.156.13 ipv4.method manual
+nmcli con mod Connexion\ filaire\ 1 ipv4.addresses 10.2.18.36/24 \
+    ipv4.gateway 10.2.18.1 ipv4.dns 194.167.156.13 ipv4.method manual
+nmcli con mod Connexion\ filaire\ 2 ipv4.addresses 192.168.36.1/24 \
+    ipv4.gateway 10.2.18.36 ipv4.dns 194.167.156.13 ipv4.method manual
 ```
 
 Ensuite, nous devons relancer les interfaces :
