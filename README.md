@@ -339,6 +339,12 @@ root@ubuntu:~# fping -g 192.168.36.0/24 -q -a
 192.168.36.2
 ```
 
+Paramètres de la commande :
+
+ - -g : génère une liste d'adresses IP à ping avec la notation CIDR
+ - -q : cache les messages d'erreur
+ - -a : affiche les systèmes en vie
+
 # 7. Connexion SSH
 
 Pour utiliser SSH, nous avons besoin de l'installer et de l'activer au démrrage :
