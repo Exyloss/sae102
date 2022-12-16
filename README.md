@@ -97,8 +97,6 @@ Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande
 sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress conv=fsync
 ```
 
-
-
 Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée au disque _/dev/sdb_) à notre ordinateur :
 
 ```bash
@@ -185,6 +183,22 @@ DNS
 Il est aussi possible de configurer les cartes réseau depuis le terminal à l'aide de la commande `nmcli` du logiciel NetworkManager.
 Cet outil en ligne de commande permet alors d'automatiser la configuration des cartes réseau en renseignant les commandes à éxecuter dans
 un script bash.
+
+Pour modifier la configuration réseau des cartes réseau, on peut utiliser ces commandes :
+
+```bash
+nmcli con mod Connexion\ filaire\ 1 ipv4.addresses 10.2.18.36/24 ipv4.gateway 10.2.18.1 ipv4.dns 194.167.156.13 ipv4.method manual
+nmcli con mod Connexion\ filaire\ 2 ipv4.addresses 192.168.36.1/24 ipv4.gateway 10.2.18.36 ipv4.dns 194.167.156.13 ipv4.method manual
+```
+
+Ensuite, nous devons relancer les interfaces :
+
+```bash
+nmcli con down Connexion\ filaire\ 1
+nmcli con up Connexion\ filaire\ 1
+nmcli con down Connexion\ filaire\ 2
+nmcli con up Connexion\ filaire\ 2
+```
 
 ## 4.2. Accès à internet depuis la VM
 
@@ -308,6 +322,10 @@ Utiliser nmap avec la commande suivante :
 ```bash
 nmap -sP 192.168.36.0/24
 ```
+
+Paramètre de la commande :
+
+ - -sP: Ping Scan - Ne fait que déterminer si les hôtes sont en ligne
 
 Cette commande donne le résultat suivant :
 
