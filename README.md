@@ -239,20 +239,6 @@ sudo apt update && sudo apt install isc-dhcp-server
 
 ## 5.2. Configuration
 
-Tout d'abord, pour permettre au Raspberry Pi de sortir de son réseau local, nous devons
-transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
-la ligne ci-dessous dans le fichier _/etc/sysctl.conf_ :
-
-```
-net.ipv4.ip_forward=1
-```
-
-Et recharger la configuration sysctl avec cette commande :
-
-```bash
-sudo sysctl -p
-```
-
 Désormais, nous allons configurer le serveur DHCP. Pour m'aider, j'ai utilisé la 
 [documentation Ubuntu du paquet isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server).
 Voici notre fichier de configuration «/etc/dhcp/dhcpd.conf» :
@@ -392,7 +378,21 @@ ssh -i ~/.ssh/id_rsa pi@192.168.36.2
 
 # 8. Accéder à internet depuis la Raspberry
 
-Pour que la Raspberry ait accès à internet, on doit transformer notre passerelle / serveur DHCP en passerelle NAT afin que l'addresse IP de
+Tout d'abord, pour permettre au Raspberry Pi de sortir de son réseau local, nous devons
+transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
+la ligne ci-dessous dans le fichier _/etc/sysctl.conf_ :
+
+```
+net.ipv4.ip_forward=1
+```
+
+Et recharger la configuration sysctl avec cette commande :
+
+```bash
+sudo sysctl -p
+```
+
+De plus, on doit activer le NAT sur notre passerelle afin que l'addresse IP de
 la Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du réseau local.
 
 Pour ce faire, j'ai décidé d'utiliser la commande `iptables` comme ceci :
