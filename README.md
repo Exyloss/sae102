@@ -94,8 +94,15 @@ XZ.
 Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
 
 ```bash
-sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress conv=fsync
+sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress 
 ```
+
+Dans cette commande :
+
+ - _if_ a comme valeur l'image d'entrée
+ - _of_ a comme valeur le périphérique de sortie
+ - _status=progress_ permet d'afficher des informations sur la progression de l'opération
+ - _bs=1M_ permet de définir le nombre d'octets que l'on peut écrire en même temps à 1M.
 
 Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée au disque _/dev/sdb_) à notre ordinateur :
 
