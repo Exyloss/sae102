@@ -12,7 +12,7 @@ output: pdf_document
 1. Création de la VM
 2. Installation de Raspberry Pi OS
     1. En utilisant RPi-imager
-    2. A l'aide du terminal
+    2. Depuis le terminal
 3. Branchements réalisés
 4. Configuration basique de la VM
     1. Paramétrage des cartes réseau
@@ -31,6 +31,8 @@ output: pdf_document
 9. Capteur ???
 
 ---
+
+\pagebreak
 
 # 1. Création de la VM
 
@@ -82,7 +84,7 @@ Paramètres à renseigner :
 [ ] Set locale settings
 ```
 
-## 2.2 A l'aide du terminal
+## 2.2 Depuis le terminal
 
 Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
 image de Raspberry Pi OS [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS with desktop». 
