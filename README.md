@@ -269,7 +269,7 @@ Puis, les lignes restantes definissent l'adresse et le masque de réseau utilis�
 les adresses du routeur et du DNS fournies aux clients et les adresses IP
 attribuables aux clients.
 
-Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, en peut éditer le
+Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, on peut éditer le
 fichier _/etc/default/isc-dhcp-server_ :
 
 ```
