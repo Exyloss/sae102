@@ -16,8 +16,8 @@ output: pdf_document
 3. Branchements réalisés
 4. Configuration basique de la VM
     1. Paramétrage des cartes réseau
-        1. Par l'interface graphique
-        2. Par le terminal
+        1. Avec RPi-imager
+        2. Depuis le terminal
     2. Accès à internet depuis la VM
 5. Installation et configuration de DHCP
     1. Installation
@@ -126,11 +126,11 @@ Voici la sortie de cette commande dans notre cas :
 ```
 root@ubuntu:~# ssh-keygen -b 4096
 Generating public/private rsa key pair.
-Enter file in which to save the key (/home/antonin/.ssh/id_rsa):
+Enter file in which to save the key (/root/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
-Your identification has been saved in /home/antonin/.ssh/id_rsa
-Your public key has been saved in /home/antonin/.ssh/id_rsa.pub
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
 The key fingerprint is:
 SHA256:JU94m2EfoSRkv+l6VR6kYRVHqU4nN3lJCZ8hQGvVcFQ antonin@archlinux
 The key's randomart image is:
