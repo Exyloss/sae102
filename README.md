@@ -124,13 +124,13 @@ ssh-keygen -b 4096
 Voici la sortie de cette commande dans notre cas :
 
 ```
-root@ubuntu:~# ssh-keygen -b 4096
+antonin@archlinux:~# ssh-keygen -b 4096
 Generating public/private rsa key pair.
-Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter file in which to save the key (/home/antonin/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
-Your identification has been saved in /root/.ssh/id_rsa
-Your public key has been saved in /root/.ssh/id_rsa.pub
+Your identification has been saved in /home/antonin/.ssh/id_rsa
+Your public key has been saved in /home/antonin/.ssh/id_rsa.pub
 The key fingerprint is:
 SHA256:JU94m2EfoSRkv+l6VR6kYRVHqU4nN3lJCZ8hQGvVcFQ antonin@archlinux
 The key's randomart image is:
@@ -359,7 +359,7 @@ Paramètre de la commande :
 Cette commande donne le résultat suivant :
 
 ```
-root@ubuntu:~# nmap -sP 192.168.36.0/24
+supervisor@ubuntu:~# nmap -sP 192.168.36.0/24
 
 Starting Nmap 7.60 ( https://nmap.org ) at 2022-11-16 11:12 CET
 Nmap scan report for 192.168.36.2
