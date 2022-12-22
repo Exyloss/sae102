@@ -491,3 +491,5 @@ bien connectée à internet.
 [Utiliser fping](https://fping.org/fping.1.html)
 
 [Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
+
+[Authentification SSH avec clef de chiffrement](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
