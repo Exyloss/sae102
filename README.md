@@ -121,6 +121,32 @@ nous allons génerer les clefs à l'aide de la commande suivante :
 ssh-keygen -b 4096
 ```
 
+Voici la sortie de cette commande dans notre cas :
+
+```
+antonin ~ ❯ ssh-keygen -b 4096
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/antonin/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/antonin/.ssh/id_rsa
+Your public key has been saved in /home/antonin/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:JU94m2EfoSRkv+l6VR6kYRVHqU4nN3lJCZ8hQGvVcFQ antonin@archlinux
+The key's randomart image is:
++---[RSA 4096]----+
+|       .+ ooo*B*E|
+|       . = .=.=*o|
+|        o O+.+ooo|
+|         B.B.=o*.|
+|        S * +o+.o|
+|         .  ...  |
+|          ..     |
+|         ..      |
+|        ..       |
++----[SHA256]-----+
+```
+
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
 Ensuite, il faut copier la clef publique présente par défaut ici : _~/.ssh/id_rsa.pub_ dans le répertoire _/mnt/etc/ssh_. Alors, nous pouvons
