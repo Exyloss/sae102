@@ -124,7 +124,7 @@ ssh-keygen -b 4096
 Voici la sortie de cette commande dans notre cas :
 
 ```
-antonin ~ ❯ ssh-keygen -b 4096
+root@ubuntu:~# ssh-keygen -b 4096
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/antonin/.ssh/id_rsa):
 Enter passphrase (empty for no passphrase):
@@ -149,11 +149,17 @@ The key's randomart image is:
 
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
-Ensuite, il faut copier la clef publique présente par défaut ici : _~/.ssh/id_rsa.pub_ dans le répertoire _/mnt/etc/ssh_. Alors, nous pouvons
-ajouter la ligne suivante au fichier _/mnt/etc/ssh/sshd_config_ :
+Puis, nous pouvons copier le contenu du fichier généré par _ssh-keygen_ dans le fichier _authorized_keys_ de la Raspberry comme ceci:
+
+```bash
+mkdir -p /mnt/home/pi/.ssh
+cat .ssh/id_rsa.pub > /mnt/home/pi/.ssh/authorized_keys
+```
+
+Ensuite, il suffit de décommenter la ligne suivante du fichier _/mnt/etc/ssh/sshd_config_ :
 
 ```
-AuthorizedKeysFile /etc/ssh/id_rsa.pub
+AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
 ```
 
 enfin, nous pouvons démonter la carte SD du répertoire /mnt :
