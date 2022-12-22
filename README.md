@@ -465,10 +465,12 @@ Normalement, la Raspberry devrait avoir accès à internet. Pour tester la conne
 _archlinux.org_ :
 
 ```bash
-curl -i https://archlinux.org/
+curl -I https://archlinux.org/
 ```
 
-Si la Raspberry est bien connectée à internet, cette commande devrait retourner les en-têtes HTTP ainsi que le contenu de la page web.
+Si la Raspberry est bien connectée à internet, cette commande devrait retourner les en-têtes HTTP de la réponse du serveur web _https://archlinux.org_.
+Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête HTTP est un succès, notre Raspberry Pi est donc 
+bien connectée à internet.
 
 # Documents utiles
 
