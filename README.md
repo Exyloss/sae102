@@ -468,7 +468,7 @@ _archlinux.org_ :
 curl -I https://archlinux.org/
 ```
 
-Si la Raspberry est bien connectée à internet, cette commande devrait retourner les en-têtes HTTP de la réponse du serveur web _https://archlinux.org_.
+Cette commande nous retourne l'en-tête HTTP de la réponse du serveur web _archlinux.org:443_.
 Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête HTTP est un succès, notre Raspberry Pi est donc 
 bien connectée à internet.
 
