@@ -381,7 +381,7 @@ sudo apt install fping
 Utiliser fping avec la commande suivante :
 
 ```
-root@ubuntu:~# fping -g 192.168.36.0/24 -q -a
+supervisor@ubuntu:~# fping -g 192.168.36.0/24 -q -a
 192.168.36.1
 192.168.36.2
 ```
@@ -454,7 +454,7 @@ Explication de la commande :
 La table de routage du serveur DHCP devrait ressembler à ceci :
 
 ```
-root@ubuntu:~# ip route
+supervisor@ubuntu:~# ip route
 default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 600
 10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.36 metric 600
 10.2.18.36 dev ens4 proto static scope link metric 100
