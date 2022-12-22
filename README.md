@@ -445,6 +445,31 @@ Explication de la commande :
    Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées établies pour voir si le datagramme appartient affectivement
    à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet au réseau local.
 
+La table de routage du serveur DHCP devrait ressembler à ceci :
+
+```
+root@ubuntu:~# ip route
+default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 600
+10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.36 metric 600
+10.2.18.36 dev ens4 proto static scope link metric 100
+192.168.36.0/24 dev ens4 proto kernel scope link src 192.168.36.1 metric 100
+```
+
+Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer le service `networking` :
+
+```bash
+sudo systemctl restart networking
+```
+
+Normalement, la Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons tenter de faire une requête HTTP au site web
+_archlinux.org_ :
+
+```bash
+curl -i https://archlinux.org/
+```
+
+Si la Raspberry est bien connectée à internet, cette commande devrait retourner les en-têtes HTTP ainsi que le contenu de la page web.
+
 # Documents utiles
 
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
