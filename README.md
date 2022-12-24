@@ -485,6 +485,8 @@ Cette commande nous retourne l'en-tête HTTP de la réponse du serveur web _arch
 Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête HTTP est un succès, notre Raspberry Pi est donc 
 bien connectée à internet.
 
+\pagebreak
+
 # Documents utiles
 
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
