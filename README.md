@@ -134,7 +134,7 @@ Afin de générer ce mot de passe, nous pouvons utiliser la fonctionalité _pass
 _OpenSSL_. Cette fonctionalité permet de générer un mot de passe suivant la norme de hachage du
 fichier _/etc/shadow_. Selon la norme de ce fichier, le hash à générer doit être structuré comme
 ceci : `$[fonction de hachage]$[salage]$[mot de passe haché]`. La fonction de hachage est indiquée
-avec un numéro, par exemple le numéro 1 représente md5, 5 représente SHA-256 et 6 représente
+par un numéro, le numéro 1 représente md5, 5 représente SHA-256 et 6 représente
 SHA-512. Puis, le salage permet de contrer les attaques classiques comme la force brute. Enfin,
 la dernière valeur est le mot de passe haché par la fonction sélectionnée. Pour cette SAE, nous
 utiliserons la fonction SHA-512. Alors pour générer le hash suivant cette norme, il est possible
