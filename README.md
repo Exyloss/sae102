@@ -500,3 +500,7 @@ bien connectée à internet.
 [Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
 
 [Authentification SSH avec clef de chiffrement](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
+
+[Stockage des mots de passe dans le fichier /etc/shadow](https://unix.stackexchange.com/questions/557319/how-to-know-if-password-in-etc-shadow-is-hashed-with-sha-or-md)
+
+[Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
