@@ -38,7 +38,7 @@ Durant ce compte-rendu, je vous montrerais comment configurer un serveur DHCP af
 connecter automatiquement un Raspberry Pi au réseau de l'IUT et à internet. Nous aborderons 
 différentes méthodes pour réaliser ces tâches, nous utiliserons tout d'abord les interfaces 
 graphiques pour simplifier les configurations, mais nous utiliserons aussi le terminal afin 
-d'automatiser ces opérations car celles-ci ont l'avantage d'être «scriptables».
+d'automatiser ces opérations.
 
 \pagebreak
 
@@ -240,23 +240,25 @@ DNS
 ### 4.1.2. Depuis le terminal
 
 Il est aussi possible de configurer les cartes réseau depuis le terminal à l'aide de la commande 
-`nmcli` du logiciel NetworkManager. Cet outil en ligne de commande permet alors d'automatiser la 
-configuration des cartes réseau en renseignant les commandes à éxecuter dans un script bash.
+`nmcli` du logiciel NetworkManager. Dans notre cas, les cartes bridge1 et pass1 sont rattachées
+respectivement aux connexions «Connexion filaire 1» et «Connexion filaire 2».
 
-Pour modifier la configuration réseau des cartes réseau, on peut utiliser ces commandes :
+Pour modifier leurs configurations, on peut utiliser ces commandes :
 
 ```bash
 nmcli con mod Connexion\ filaire\ 1 ipv4.addresses 10.2.18.36/24 \
     ipv4.gateway 10.2.18.1 ipv4.dns 194.167.156.13 ipv4.method manual
+
 nmcli con mod Connexion\ filaire\ 2 ipv4.addresses 192.168.36.1/24 \
     ipv4.gateway 10.2.18.36 ipv4.dns 194.167.156.13 ipv4.method manual
 ```
 
-Ensuite, nous devons relancer les interfaces :
+Ensuite, nous pouvons relancer ces connexions afin d'appliquer les changements effectués :
 
 ```bash
 nmcli con down Connexion\ filaire\ 1
 nmcli con up Connexion\ filaire\ 1
+
 nmcli con down Connexion\ filaire\ 2
 nmcli con up Connexion\ filaire\ 2
 ```
