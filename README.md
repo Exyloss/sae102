@@ -131,9 +131,9 @@ l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera 
 celui-ci.
 
 Afin de générer ce mot de passe, nous pouvons utiliser la fonctionalité _passwd_ du programme
-_OpenSSL_. Cette fonctionalité permet de générer un mot de passe suivant la norme de hashage du
+_OpenSSL_. Cette fonctionalité permet de générer un mot de passe suivant la norme de hachage du
 fichier _/etc/shadow_. Selon la norme de ce fichier, le hash à générer doit être structuré comme
-ceci : `$[fonction de hashage]$[salage]$[mot de passe haché]`. La fonction de hashage est indiquée
+ceci : `$[fonction de hachage]$[salage]$[mot de passe haché]`. La fonction de hachage est indiquée
 avec un numéro, par exemple le numéro 1 représente md5, 5 représente SHA-256 et 6 représente
 SHA-512. Puis, le salage permet de contrer les attaques classiques comme la force brute. Enfin,
 la dernière valeur est le mot de passe haché par la fonction sélectionnée. Pour cette SAE, nous
@@ -141,8 +141,10 @@ utiliserons la fonction SHA-512. Alors pour générer le hash suivant cette norm
 de lancer la commande suivante :
 
 ```bash
-openssl passwd -6 [mot de passe]
+openssl passwd -6
 ```
+
+Il suffira de renseigner et de confirmer son mot de passe pour générer le hash.
 
 Après avoir généré cette valeur, nous pouvons la placer dans le deuxième champ de la ligne de 
 l'utilisateur pi du fichier _/etc/shadow_, les champs étant séparés par «:».
