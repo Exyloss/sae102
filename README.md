@@ -512,7 +512,7 @@ HTTP est un succès, notre Raspberry Pi est donc bien connectée à internet.
 
 \pagebreak
 
-# Documents utiles
+# Ressources utilisées
 
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
 
