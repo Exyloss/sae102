@@ -128,54 +128,30 @@ sudo mount /dev/sdb1 /mnt/boot
 Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé _ssh_
 dans le répertoire _/mnt/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, 
 l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
-celui-ci. Nous allons donc devoir générer un couple de clefs RSA afin de se connecter à l'aide 
-de la clef privée. Sur notre ordinateur, 
-nous allons génerer les clefs à l'aide de la commande suivante :
+celui-ci.
+
+Afin de générer ce mot de passe, nous pouvons utiliser la fonctionalité _passwd_ du programme
+_OpenSSL_. Cette fonctionalité permet de générer un mot de passe suivant la norme de hashage du
+fichier _/etc/shadow_. Selon la norme de ce fichier, le hash à générer doit être structuré comme
+ceci : `$[fonction de hashage]$[salage]$[mot de passe haché]`. La fonction de hashage est indiquée
+avec un numéro, par exemple le numéro 1 représente md5, 5 représente SHA-256 et 6 représente
+SHA-512. Puis, le salage permet de contrer les attaques classiques comme la force brute. Enfin,
+la dernière valeur est le mot de passe haché par la fonction sélectionnée. Pour cette SAE, nous
+utiliserons la fonction SHA-512. Alors pour générer le hash suivant cette norme, il est possible
+de lancer la commande suivante :
 
 ```bash
-ssh-keygen -b 4096
+openssl passwd -6 [mot de passe]
 ```
 
-Voici la sortie de cette commande dans notre cas :
+Après avoir généré cette valeur, nous pouvons la placer dans le deuxième champ de la ligne de 
+l'utilisateur pi du fichier _/etc/shadow_, les champs étant séparés par «:».
+
+Ensuite, il suffit d'ajouter la ligne suivante au fichier _/mnt/etc/ssh/sshd_config_ afin
+d'interdire la connexion SSH en tant que root :
 
 ```
-antonin@archlinux:~# ssh-keygen -b 4096
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/antonin/.ssh/id_rsa):
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/antonin/.ssh/id_rsa
-Your public key has been saved in /home/antonin/.ssh/id_rsa.pub
-The key fingerprint is:
-SHA256:JU94m2EfoSRkv+l6VR6kYRVHqU4nN3lJCZ8hQGvVcFQ antonin@archlinux
-The key's randomart image is:
-+---[RSA 4096]----+
-|       .+ ooo*B*E|
-|       . = .=.=*o|
-|        o O+.+ooo|
-|         B.B.=o*.|
-|        S * +o+.o|
-|         .  ...  |
-|          ..     |
-|         ..      |
-|        ..       |
-+----[SHA256]-----+
-```
-
-Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
-
-Puis, nous pouvons copier le contenu du fichier généré par _ssh-keygen_ dans le fichier 
-_authorized_keys_ de la Raspberry comme ceci:
-
-```bash
-mkdir -p /mnt/home/pi/.ssh
-cat .ssh/id_rsa.pub > /mnt/home/pi/.ssh/authorized_keys
-```
-
-Ensuite, il suffit de décommenter la ligne suivante du fichier _/mnt/etc/ssh/sshd_config_ :
-
-```
-AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
+PermitRootLogin no
 ```
 
 enfin, nous pouvons démonter la carte SD du répertoire /mnt :
@@ -436,13 +412,6 @@ ssh pi@192.168.36.2
 Cette commande permet d'ouvrir un shell sécurisé en tant que _pi_ sur la machine ayant comme 
 addresse IP 192.168.36.1. SSH demande ensuite de renseigner un mot de passe, il suffira d'écrire
 celui définit à l'installation de Raspberry Pi OS.
-
-Si le Raspberry Pi a été configuré depuis le terminal, il faut se connecter en ssh à l'aide de la
-clef privée en utilisant cette commande :
-
-```bash
-ssh -i ~/.ssh/id_rsa pi@192.168.36.2
-```
 
 # 8. Accéder à internet depuis la Raspberry
 
