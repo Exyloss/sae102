@@ -32,6 +32,13 @@ output: pdf_document
 
 ---
 
+\vspace{2cm}
+
+Durant ce compte-rendu, je vous montrerais comment configurer un serveur DHCP afin de pouvoir connecter automatiquement un Raspberry Pi au 
+réseau de l'IUT et à internet. Nous aborderons différentes méthodes pour réaliser ces tâches, nous utiliserons tout d'abord les interfaces 
+graphiques pour simplifier les configurations, mais nous utiliserons aussi le terminal afin d'automatiser ces opérations car celles-ci ont 
+l'avantage d'être «scriptables».
+
 \pagebreak
 
 # 1. Création de la VM
