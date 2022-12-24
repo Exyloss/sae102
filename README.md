@@ -34,10 +34,11 @@ output: pdf_document
 
 \vspace{2cm}
 
-Durant ce compte-rendu, je vous montrerais comment configurer un serveur DHCP afin de pouvoir connecter automatiquement un Raspberry Pi au 
-réseau de l'IUT et à internet. Nous aborderons différentes méthodes pour réaliser ces tâches, nous utiliserons tout d'abord les interfaces 
-graphiques pour simplifier les configurations, mais nous utiliserons aussi le terminal afin d'automatiser ces opérations car celles-ci ont 
-l'avantage d'être «scriptables».
+Durant ce compte-rendu, je vous montrerais comment configurer un serveur DHCP afin de pouvoir 
+connecter automatiquement un Raspberry Pi au réseau de l'IUT et à internet. Nous aborderons 
+différentes méthodes pour réaliser ces tâches, nous utiliserons tout d'abord les interfaces 
+graphiques pour simplifier les configurations, mais nous utiliserons aussi le terminal afin 
+d'automatiser ces opérations car celles-ci ont l'avantage d'être «scriptables».
 
 \pagebreak
 
@@ -72,11 +73,12 @@ Ne pas utiliser virtio [ ]
 
 ## 2.1. Avec RPi-imager
 
-Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons utiliser le logiciel
-fournit par Raspberry Pi nommé `rpi-imager`. Ce logiciel permet d'installer Raspberry Pi OS 32 bits et de
-configurer la Raspberry avant son allumage. Pour flasher la Raspberry, il suffit de sélectionner le système
-d'exploitation «Raspberry Pi OS 32 bits», d'ajouter la micro-sd en tant que support de stockage, de modifier les
-paramètres par défaut en cliquant sur la roue dentée et enfin de cliquer sur le bouton écrire.
+Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons 
+utiliser le logiciel fournit par Raspberry Pi nommé `rpi-imager`. Ce logiciel permet d'installer 
+Raspberry Pi OS 32 bits et de configurer la Raspberry avant son allumage. Pour flasher la 
+Raspberry, il suffit de sélectionner le système d'exploitation «Raspberry Pi OS 32 bits», d'ajouter
+la micro-sd en tant que support de stockage, de modifier les paramètres par défaut en cliquant sur 
+la roue dentée et enfin de cliquer sur le bouton écrire.
 
 Paramètres à renseigner :
 
@@ -93,12 +95,14 @@ Paramètres à renseigner :
 
 ## 2.2 Depuis le terminal
 
-Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. Tout d'abord, nous allons télécharger le fichier
-image de Raspberry Pi OS [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS with desktop». 
+Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. 
+Tout d'abord, nous allons télécharger le fichierimage de Raspberry Pi OS 
+[ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
+with desktop». 
 
 Ensuite,
-nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui donnant comme argument le fichier compressé en 
-XZ. 
+nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
+donnant comme argument le fichier compressé en XZ. 
 
 Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
 
@@ -113,15 +117,19 @@ Dans cette commande :
  - _status=progress_ permet d'afficher des informations sur la progression de l'opération
  - _bs=1M_ permet de définir le nombre d'octets que l'on peut écrire en même temps à 1M.
 
-Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée au disque _/dev/sdb_) à notre ordinateur :
+Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte SD (ici rattachée 
+au disque _/dev/sdb_) à notre ordinateur :
 
 ```bash
 sudo mount /dev/sdb2 /mnt
 sudo mount /dev/sdb1 /mnt/boot
 ```
 
-Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé _ssh_ dans le répertoire _/mnt/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
-celui-ci. Nous allons donc devoir générer un couple de clefs RSA afin de se connecter à l'aide de la clef privée. Sur notre ordinateur, 
+Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé _ssh_
+dans le répertoire _/mnt/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, 
+l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
+celui-ci. Nous allons donc devoir générer un couple de clefs RSA afin de se connecter à l'aide 
+de la clef privée. Sur notre ordinateur, 
 nous allons génerer les clefs à l'aide de la commande suivante :
 
 ```bash
@@ -156,7 +164,8 @@ The key's randomart image is:
 
 Pour plus de sécurité, vous pouvez définir un mot de passe pour utiliser vos clefs RSA.
 
-Puis, nous pouvons copier le contenu du fichier généré par _ssh-keygen_ dans le fichier _authorized_keys_ de la Raspberry comme ceci:
+Puis, nous pouvons copier le contenu du fichier généré par _ssh-keygen_ dans le fichier 
+_authorized_keys_ de la Raspberry comme ceci:
 
 ```bash
 mkdir -p /mnt/home/pi/.ssh
@@ -189,9 +198,10 @@ Les câbles verts représentent les connexions préétablies.
 
 ### 4.1.1. Depuis l'interface graphique
 
-Nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte bridge1 possède une
-adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la prise chromée afin d'accéder à internet. Ainsi,
-son adresse ip sera 10.2.18.36 et sa passerelle sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
+Nous avons configuré les paramètres de réseau des deux cartes de la machine virtuelle. La carte 
+bridge1 possède une adresse ip appartenant à la plage d'ip du poste utilisé et est connectée à la 
+prise chromée afin d'accéder à internet. Ainsi, son adresse ip sera 10.2.18.36 et sa passerelle 
+sera 10.2.18.1. Son masque et son DNS seront 255.255.255.0 et 194.167.156.13.
 
 ```
 Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
@@ -208,8 +218,9 @@ DNS
 [194.167.156.13]
 ```
 
-La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle sera 10.2.18.36 afin que celle-ci
-soit reliée à internet. Son masque et son DNS sont les mêmes que ceux de bridge1.
+La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle 
+sera 10.2.18.36 afin que celle-ci soit reliée à internet. Son masque et son DNS sont les mêmes 
+que ceux de bridge1.
 
 ```
 Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
@@ -228,9 +239,9 @@ DNS
 
 ### 4.1.2. Depuis le terminal
 
-Il est aussi possible de configurer les cartes réseau depuis le terminal à l'aide de la commande `nmcli` du logiciel NetworkManager.
-Cet outil en ligne de commande permet alors d'automatiser la configuration des cartes réseau en renseignant les commandes à éxecuter dans
-un script bash.
+Il est aussi possible de configurer les cartes réseau depuis le terminal à l'aide de la commande 
+`nmcli` du logiciel NetworkManager. Cet outil en ligne de commande permet alors d'automatiser la 
+configuration des cartes réseau en renseignant les commandes à éxecuter dans un script bash.
 
 Pour modifier la configuration réseau des cartes réseau, on peut utiliser ces commandes :
 
@@ -260,7 +271,8 @@ export http_proxy="http://cache.univ-pau.fr:3128"
 export https_proxy="http://cache.univ-pau.fr:3128"
 ```
 
-On peut vérifier le fonctionnement de notre configuration en pingant par exemple _archlinux.org_ en IPv4 :
+On peut vérifier le fonctionnement de notre configuration en pingant par exemple _archlinux.org_
+en IPv4 :
 
 ```bash
 ping -4 archlinux.org
@@ -270,8 +282,9 @@ ping -4 archlinux.org
 
 ## 5.1. Installation
 
-Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets d'ubuntu (voir figure en fin de partie).
-Après quelques recherches, nous résolûmes cette erreur en rentrant la commande suivante :
+Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets 
+d'ubuntu (voir figure en fin de partie). Après quelques recherches, nous résolûmes cette erreur en
+rentrant la commande suivante :
 
 ```bash
 sudo apt install --reinstall libappstream4
@@ -302,20 +315,22 @@ subnet 192.168.36.0 netmask 255.255.255.0 {
 }
 ```
 
-Les deux premières lignes de ce fichier indiquent que le serveur DHCP attribuera une ip au client pour une durée de 600 secondes,
+Les deux premières lignes de ce fichier indiquent que le serveur DHCP attribuera une ip au client
+pour une durée de 600 secondes,
 et si le client renseigne lui-même cette valeur, celle-ci ne peut pas dépasser 7200 secondes. 
 Puis, les lignes restantes definissent l'adresse et le masque de réseau utilisés par le serveur, 
 les adresses du routeur et du DNS fournies aux clients et les adresses IP
 attribuables aux clients.
 
-Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, on peut éditer le
-fichier _/etc/default/isc-dhcp-server_ :
+Puis, nous devons définir l'interface utilisée par le serveur DHCP. Pour ce faire, on peut éditer
+le fichier _/etc/default/isc-dhcp-server_ :
 
 ```
 INTERFACESv4="ens4"
 ```
 
-Enfin, nous pouvons lancer le service DHCP et l'activer au démarrage à l'aide de la commande suivante :
+Enfin, nous pouvons lancer le service DHCP et l'activer au démarrage à l'aide de la commande 
+suivante :
 
 ```bash
 sudo systemctl enable --now isc-dhcp-server.service
@@ -343,7 +358,8 @@ lease 192.168.36.2 {
 }
 ```
 
-On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après l'avoir connecté.
+On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après
+l'avoir connecté.
 
 ## 6.2. Avec nmap
 
@@ -408,17 +424,19 @@ sudo apt install ssh
 sudo systemctl enable --now sshd.service
 ```
 
-Enfin, nous pouvons nous connecter à la Raspberry depuis le serveur DHCP à l'aide de cette commande :
+Enfin, nous pouvons nous connecter à la Raspberry depuis le serveur DHCP à l'aide de cette
+commande :
 
 ```bash
 ssh pi@192.168.36.2
 ```
 
-Cette commande permet d'ouvrir un shell sécurisé en tant que _pi_ sur la machine ayant comme addresse IP 192.168.36.1. SSH demande
-ensuite de renseigner un mot de passe, il suffira d'écrire celui définit à l'installation de Raspberry Pi OS.
+Cette commande permet d'ouvrir un shell sécurisé en tant que _pi_ sur la machine ayant comme 
+addresse IP 192.168.36.1. SSH demande ensuite de renseigner un mot de passe, il suffira d'écrire
+celui définit à l'installation de Raspberry Pi OS.
 
-Si le Raspberry Pi a été configuré depuis le terminal, il faut se connecter en ssh à l'aide de la clef privée
-en utilisant cette commande :
+Si le Raspberry Pi a été configuré depuis le terminal, il faut se connecter en ssh à l'aide de la
+clef privée en utilisant cette commande :
 
 ```bash
 ssh -i ~/.ssh/id_rsa pi@192.168.36.2
@@ -441,7 +459,8 @@ sudo sysctl -p
 ```
 
 De plus, on doit activer le NAT sur notre passerelle afin que l'addresse IP de
-la Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du réseau local.
+la Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du
+réseau local.
 
 Pour ce faire, j'ai décidé d'utiliser la commande `iptables` comme ceci :
 
@@ -451,12 +470,17 @@ iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 
 Explication de la commande :
 
- - La valeur _POSTROUTING_ de l'option -A permet d'executer le _MASQUERADE_ juste avant la sortie du paquet de l'interface _ens3_.
- - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet passe par la passerelle.
+ - La valeur _POSTROUTING_ de l'option -A permet d'executer le _MASQUERADE_ juste avant la sortie 
+     du paquet de l'interface _ens3_.
+ - La valeur _nat_ de l'option -t permet quand à elle de consulter la table quand un nouveau paquet
+     passe par la passerelle.
  - L'argument ens3 de l'option -o est le nom de la carte réseau de sortie des paquets
- - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des paquets tranférés et de les modifier afin de changer leur IP source lors de leur envoi.
-   Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées établies pour voir si le datagramme appartient affectivement
-   à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à l'aller du datagramme et le transmet au réseau local.
+ - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des paquets 
+     tranférés et de les modifier afin de changer leur IP source lors de leur envoi.
+     Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées 
+     établies pour voir si le datagramme appartient affectivement
+     à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à 
+     l'aller du datagramme et le transmet au réseau local.
 
 La table de routage du serveur DHCP devrait ressembler à ceci :
 
@@ -468,22 +492,23 @@ default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 600
 192.168.36.0/24 dev ens4 proto kernel scope link src 192.168.36.1 metric 100
 ```
 
-Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer le service `networking` :
+Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer le service 
+`networking` :
 
 ```bash
 sudo systemctl restart networking
 ```
 
-Normalement, la Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons tenter de faire une requête HTTP au site web
-_archlinux.org_ :
+Normalement, la Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons 
+tenter de faire une requête HTTP au site web _archlinux.org_ :
 
 ```bash
 curl -I https://archlinux.org/
 ```
 
 Cette commande nous retourne l'en-tête HTTP de la réponse du serveur web _archlinux.org:443_.
-Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête HTTP est un succès, notre Raspberry Pi est donc 
-bien connectée à internet.
+Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête 
+HTTP est un succès, notre Raspberry Pi est donc bien connectée à internet.
 
 \pagebreak
 
