@@ -506,3 +506,5 @@ bien connectée à internet.
 [Stockage des mots de passe dans le fichier /etc/shadow](https://unix.stackexchange.com/questions/557319/how-to-know-if-password-in-etc-shadow-is-hashed-with-sha-or-md)
 
 [Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
+
+[Utilité du salage des mots de passe](https://fr.wikipedia.org/wiki/Salage_(cryptographie))
