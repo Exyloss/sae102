@@ -10,8 +10,16 @@ printf '\nAdresse IP du serveur DNS:'
 read -r dns
 
 # On configure les deux cartes réseau
-nmcli con mod Connexion\ filaire\ 1 ipv4.addresses "$ip"/24 ipv4.gateway "$routeur" ipv4.dns "$dns" ipv4.method manual
-nmcli con mod Connexion\ filaire\ 2 ipv4.addresses "$ip_lan"/24 ipv4.gateway "$ip" ipv4.dns "$dns" ipv4.method manual
+nmcli con mod Connexion\ filaire\ 1 \
+    ipv4.addresses "$ip"/24 \
+    ipv4.gateway "$routeur" \
+    ipv4.dns "$dns" \
+    ipv4.method manual
+nmcli con mod Connexion\ filaire\ 2 \
+    ipv4.addresses "$ip_lan"/24 \
+    ipv4.gateway "$ip" \
+    ipv4.dns "$dns" \
+    ipv4.method manual
 
 # On relance les deux connexions
 nmcli con down Connexion\ filaire\ 1
