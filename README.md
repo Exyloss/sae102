@@ -98,20 +98,27 @@ Paramètres à renseigner :
 Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. 
 Tout d'abord, nous allons télécharger le fichierimage de Raspberry Pi OS 
 [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
-with desktop». 
+with desktop».
+
+Pour vérifier l'intégrité du fichier téléchargé, nous pouvons vérifier le hash d'intégrité du fichier téléchargé comme ceci :
+
+```
+supervisor@ubuntu:~/Téléchargements# sha256sum 2022-09-22-raspios-bullseye-armhf.img.xz
+4d8f38d014a807198996693b90cbeef94e19d9fd7fbefba7068db8df4d698cdd  2022-09-22-raspios-bullseye-armhf.img.xz
+```
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
 donnant comme argument le fichier compressé en XZ :
 
 ```bash
-unxz ~/Downloads/2022-09-22-raspios-bullseye-armhf.img.xz
+unxz ~/Téléchargements/2022-09-22-raspios-bullseye-armhf.img.xz
 ```
 
 Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
 
 ```bash
-sudo dd if=~/Downloads/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress 
+sudo dd if=~/Téléchargements/2022-09-22-raspios-bullseye-armhf.img of=/dev/sdb bs=1M status=progress 
 ```
 
 Dans cette commande :
