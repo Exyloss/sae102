@@ -28,7 +28,6 @@ output: pdf_document
     3. Avec fping
 7. Connexion SSH
 8. Accéder à internet depuis la Raspberry
-9. Capteur ???
 
 ---
 
