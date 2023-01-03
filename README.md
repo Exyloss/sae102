@@ -99,12 +99,16 @@ Tout d'abord, nous allons télécharger le fichier image de Raspberry Pi OS
 [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
 with desktop».
 
-Pour vérifier l'intégrité du fichier téléchargé, nous pouvons vérifier le hash d'intégrité du fichier téléchargé comme ceci :
+Pour vérifier l'intégrité du fichier téléchargé, nous pouvons 
+vérifier le hash d'intégrité du fichier téléchargé comme ceci :
 
 ```
 supervisor@ubuntu:~/Téléchargements# sha256sum 2022-09-22-raspios-bullseye-armhf.img.xz
 4d8f38d014a807198996693b90cbeef94e19d9fd7fbefba7068db8df4d698cdd  2022-09-22-raspios-bullseye-armhf.img.xz
 ```
+
+Ce hash est bien le même que celui présent sur le site de la fondation Raspberry Pi, le fichier est donc
+intègre.
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
