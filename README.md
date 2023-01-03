@@ -102,7 +102,11 @@ with desktop».
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
-donnant comme argument le fichier compressé en XZ. 
+donnant comme argument le fichier compressé en XZ :
+
+```bash
+unxz ~/Downloads/2022-09-22-raspios-bullseye-armhf.img.xz
+```
 
 Alors, nous installons Raspberry Pi OS sur une carte SD à l'aide de la commande DD :
 
@@ -136,7 +140,9 @@ fichier _/etc/shadow_. Selon la norme de ce fichier, le hash à générer doit �
 ceci : `$[fonction de hachage]$[salage]$[mot de passe haché]`. La fonction de hachage est indiquée
 par un numéro, le numéro 1 représente md5, 5 représente SHA-256 et 6 représente
 SHA-512. Puis, le salage permet de contrer les attaques classiques comme la force brute. Enfin,
-la dernière valeur est le mot de passe haché par la fonction sélectionnée. Pour cette SAE, nous
+la dernière valeur est le mot de passe haché par la fonction sélectionnée. 
+
+Pour cette SAE, nous
 utiliserons la fonction SHA-512. Alors pour générer le hash suivant cette norme, il est possible
 de lancer la commande suivante :
 
@@ -144,7 +150,7 @@ de lancer la commande suivante :
 openssl passwd -6
 ```
 
-Il suffira de renseigner et de confirmer son mot de passe pour générer le hash.
+Il suffira de renseigner et de confirmer son mot de passe pour générer l'expression souhaitée.
 
 Après avoir généré cette valeur, nous pouvons la placer dans le deuxième champ de la ligne de 
 l'utilisateur pi du fichier _/etc/shadow_, les champs étant séparés par «:».
@@ -459,8 +465,8 @@ La table de routage du serveur DHCP devrait ressembler à ceci :
 
 ```
 supervisor@ubuntu:~# ip route
-default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 600
-10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.36 metric 600
+default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 100
+10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.36 metric 100
 10.2.18.36 dev ens4 proto static scope link metric 100
 192.168.36.0/24 dev ens4 proto kernel scope link src 192.168.36.1 metric 100
 ```
