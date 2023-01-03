@@ -22,12 +22,12 @@ output: pdf_document
 5. Installation et configuration de DHCP
     1. Installation
     2. Configuration
-6. Récupération de l'addresse IP de la Raspberry
+6. Récupération de l'addresse IP du Raspberry
     1. Avec dhcpd.leases
     2. Avec nmap
     3. Avec fping
 7. Connexion SSH
-8. Accéder à internet depuis la Raspberry
+8. Accéder à internet depuis le Raspberry
 
 ---
 
@@ -72,10 +72,10 @@ Ne pas utiliser virtio [ ]
 
 ## 2.1. Avec RPi-imager
 
-Afin de flasher la carte SD de la Raspberry avec le système d'exploitation adapté, nous allons 
+Afin de flasher la carte SD du Raspberry avec le système d'exploitation adapté, nous allons 
 utiliser le logiciel fournit par Raspberry Pi nommé `rpi-imager`. Ce logiciel permet d'installer 
-Raspberry Pi OS 32 bits et de configurer la Raspberry avant son allumage. Pour flasher la 
-Raspberry, il suffit de sélectionner le système d'exploitation «Raspberry Pi OS 32 bits», d'ajouter
+Raspberry Pi OS 32 bits et de configurer le Raspberry avant son allumage. Pour flasher la carte sd
+du Raspberry, il suffit de sélectionner le système d'exploitation «Raspberry Pi OS 32 bits», d'ajouter
 la micro-sd en tant que support de stockage, de modifier les paramètres par défaut en cliquant sur 
 la roue dentée et enfin de cliquer sur le bouton écrire.
 
@@ -95,7 +95,7 @@ Paramètres à renseigner :
 ## 2.2 Depuis le terminal
 
 Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. 
-Tout d'abord, nous allons télécharger le fichierimage de Raspberry Pi OS 
+Tout d'abord, nous allons télécharger le fichier image de Raspberry Pi OS 
 [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
 with desktop».
 
@@ -330,11 +330,11 @@ suivante :
 sudo systemctl enable --now isc-dhcp-server.service
 ```
 
-# 6. Récupération de l'addresse IP de la Raspberry
+# 6. Récupération de l'addresse IP du Raspberry
 
 ## 6.1. Avec dhcpd.leases
 
-Après avoir brancher la Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
+Après avoir brancher le Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
 Nous pouvons la récupérer à l'aide du fichier des baux généré par `isc-dhcp-server`.
 Ce fichier est _/var/lib/dhcpd.leases_ et ressemble à ceci :
 
@@ -352,7 +352,7 @@ lease 192.168.36.2 {
 }
 ```
 
-On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée à la Raspberry peu de temps après
+On peut bien voir que l'adresse IP 192.168.36.2 a été attribuée au Raspberry peu de temps après
 l'avoir connecté.
 
 ## 6.2. Avec nmap
@@ -418,7 +418,7 @@ sudo apt install ssh
 sudo systemctl enable --now sshd.service
 ```
 
-Enfin, nous pouvons nous connecter à la Raspberry depuis le serveur DHCP à l'aide de cette
+Enfin, nous pouvons nous connecter au Raspberry depuis le serveur DHCP à l'aide de cette
 commande :
 
 ```bash
@@ -429,7 +429,7 @@ Cette commande permet d'ouvrir un shell sécurisé en tant que _pi_ sur la machi
 addresse IP 192.168.36.1. SSH demande ensuite de renseigner un mot de passe, il suffira d'écrire
 celui définit à l'installation de Raspberry Pi OS.
 
-# 8. Accéder à internet depuis la Raspberry
+# 8. Accéder à internet depuis le Raspberry
 
 Tout d'abord, pour permettre au Raspberry Pi de sortir de son réseau local, nous devons
 transformer le serveur DHCP en une sorte de routeur. Pour ce faire, il faut décommenter
@@ -445,8 +445,8 @@ Et recharger la configuration sysctl avec cette commande :
 sudo sysctl -p
 ```
 
-De plus, on doit activer le NAT sur notre passerelle afin que l'addresse IP de
-la Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du
+De plus, on doit activer le NAT sur notre passerelle afin que l'addresse IP du
+Raspberry soit remplacée par celle de sa passerelle lors de l'envoi de paquets à l'exterieur du
 réseau local.
 
 Pour ce faire, j'ai décidé d'utiliser la commande `iptables` comme ceci :
@@ -486,7 +486,7 @@ Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer l
 sudo systemctl restart networking
 ```
 
-Normalement, la Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons 
+Normalement, le Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons 
 tenter de faire une requête HTTP au site web _archlinux.org_ :
 
 ```bash
