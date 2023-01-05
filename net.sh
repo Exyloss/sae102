@@ -36,4 +36,4 @@ echo "|Configuration réseau terminée, pour la suite du script, lancez cette co
 echo "|chmod +x setup.sh && sudo ./setup.sh                                           |"
 echo "\\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/"
 
-sudo -c "chmod +x setup.sh && ./setup.sh $ip_lan"
+su root -c "chmod +x setup.sh && ./setup.sh $ip_lan"
