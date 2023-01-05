@@ -344,14 +344,15 @@ Ce fichier est _/var/lib/dhcpd.leases_ et ressemble à ceci :
 
 ```
 lease 192.168.36.2 {
-  starts 3 2022/11/16 10:09:52;
-  ends 3 2022/11/16 10:19:52;
-  cltt 3 2022/11/16 10:09:52;
+  starts 4 2023/01/05 09:59:47;
+  ends 4 2023/01/05 10:09:47;
+  cltt 4 2023/01/05 09:59:47;
   binding state active;
   next binding state free;
   rewind binding state free;
-  hardware ethernet 08:8f:c3:2f:55:22;
-  uid "\001\010\217\303/U\"";
+  hardware ethernet e4:5f:01:1e:0c:0a;
+  uid "\001\344_\001\036\014\012";
+  set vendor-class-identifier = "dhcpcd-8.1.2:Linux-5.15.61-v7l+:armv7l:BCM2711";
   client-hostname "raspberrypi";
 }
 ```
