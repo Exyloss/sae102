@@ -135,19 +135,19 @@ Puis, pour éditer la configuration du Raspberry Pi, nous allons monter la carte
 au disque _/dev/sdb_) à notre ordinateur :
 
 ```bash
-sudo mount /dev/sdb2 /mnt
-sudo mount /dev/sdb1 /mnt/boot
+sudo mount /dev/sdb2 /media/supervisor/rootfs
+sudo mount /dev/sdb1 /media/supervisor/boot
 ```
 
 Pour activer ssh au démarrage du Raspberry Pi, il nous suffit ce créer un fichier vide nommé _ssh_
-dans le répertoire _/mnt/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, 
+dans le répertoire _/media/supervisor/boot_. Cependant la configuration de ssh n'est pas terminée. En effet, 
 l'utilisateur pi n'ayant pas de mot de passe par défaut, la connexion ssh sera impossible avec
 celui-ci.
 
 Afin de générer ce mot de passe, nous pouvons utiliser la fonctionalité _passwd_ du programme
 _OpenSSL_. Cette fonctionalité permet de générer un mot de passe suivant la norme de hachage du
-fichier _/etc/shadow_. Selon la norme de ce fichier, le hash à générer doit être structuré comme
-ceci : 
+fichier _/media/supervisor/rootfs/etc/shadow_. Selon la norme de ce fichier, le hash à générer 
+doit être structuré comme ceci : 
 
 `$[fonction de hachage]$[salage]$[mot de passe haché]`
 
@@ -156,9 +156,10 @@ SHA-256 et 6 représente SHA-512. Puis, le salage permet de contrer les attaques
 la force brute. Enfin, la dernière valeur est le mot de passe haché par la fonction sélectionnée. 
 
 Pour cette SAE, nous utiliserons la fonction SHA-512. Alors pour générer le hash suivant cette
-norme, il est possible de lancer la commande suivante :
+norme, il est possible de lancer les commandes suivantes :
 
 ```bash
+sudo apt install openssl # On met à jour openssl
 openssl passwd -6
 ```
 
@@ -167,17 +168,18 @@ Il suffira de renseigner et de confirmer son mot de passe pour générer l'expre
 Après avoir généré cette valeur, nous pouvons la placer dans le deuxième champ de la ligne de 
 l'utilisateur pi du fichier _/etc/shadow_, les champs étant séparés par «:».
 
-Ensuite, il suffit d'ajouter la ligne suivante au fichier _/mnt/etc/ssh/sshd_config_ afin
+Ensuite, il suffit d'ajouter la ligne suivante au fichier _/media/supervisor/rootfs/etc/ssh/sshd_config_ afin
 d'interdire la connexion SSH en tant que root :
 
 ```
 PermitRootLogin no
 ```
 
-enfin, nous pouvons démonter la carte SD du répertoire /mnt :
+enfin, nous pouvons démonter la carte SD du répertoire /media/supervisor :
 
 ```bash
-sudo umount -R /mnt
+sudo umount /media/supervisor/boot
+sudo umount /media/supervisor/rootfs
 ```
 
 Note : le -R permet de démonter la carte SD récursivement.
