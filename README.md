@@ -178,8 +178,7 @@ PermitRootLogin no
 enfin, nous pouvons démonter la carte SD du répertoire /media/supervisor :
 
 ```bash
-sudo umount /media/supervisor/boot
-sudo umount /media/supervisor/rootfs
+sudo umount /media/supervisor/*
 ```
 
 Note : le -R permet de démonter la carte SD récursivement.
