@@ -2,7 +2,7 @@
 
 printf 'Adresse IP du serveur (côté routeur):'
 read -r ip
-printf '\nAdresse IP du serveur (côté réseau local):'
+printf "\n3 premiers nombres de l'IP du serveur (côté réseau local):"
 read -r ip_lan
 printf '\nAdresse IP du routeur:'
 read -r routeur
@@ -16,7 +16,7 @@ nmcli con mod Connexion\ filaire\ 1 \
     ipv4.dns "$dns" \
     ipv4.method manual
 nmcli con mod Connexion\ filaire\ 2 \
-    ipv4.addresses "$ip_lan"/24 \
+    ipv4.addresses "$ip_lan.1"/24 \
     ipv4.gateway "$ip" \
     ipv4.dns "$dns" \
     ipv4.method manual
@@ -35,3 +35,5 @@ echo "/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 echo "|Configuration réseau terminée, pour la suite du script, lancez cette commande :|"
 echo "|chmod +x setup.sh && sudo ./setup.sh                                           |"
 echo "\\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/"
+
+sudo -c "chmod +x setup.sh && ./setup.sh"
