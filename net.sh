@@ -33,5 +33,5 @@ export https_proxy=http://cache.univ-pau.fr:3128
 
 echo "/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\"
 echo "|Configuration réseau terminée, pour la suite du script, lancez cette commande :|"
-echo "|chmod +x setup.sh && sudo ./setup.sh"
+echo "|chmod +x setup.sh && sudo ./setup.sh                                           |"
 echo "\\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/"
