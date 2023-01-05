@@ -11,8 +11,9 @@ output: pdf_document
 
 1. Création de la VM
 2. Installation de Raspberry Pi OS
-    1. En utilisant RPi-imager
-    2. Depuis le terminal
+    1. Montage de la carte sd sur la VM
+    2. En utilisant RPi-imager
+    3. Depuis le terminal
 3. Branchements réalisés
 4. Configuration basique de la VM
     1. Paramétrage des cartes réseau
@@ -70,7 +71,12 @@ Ne pas utiliser virtio [ ]
 
 # 2. Installation de Raspberry Pi OS
 
-## 2.1. Avec RPi-imager
+## 2.1. Montage de la carte SD sur la VM
+
+Pour monter une carte sd branchée sur une machine physique, il suffit d'activer le périphérique
+dans Remote Viewer en allant dans Fichier > Sélection du périphérique USB.
+
+## 2.2. Avec RPi-imager
 
 Afin de flasher la carte SD du Raspberry avec le système d'exploitation adapté, nous allons 
 utiliser le logiciel fournit par Raspberry Pi nommé `rpi-imager`. Ce logiciel permet d'installer 
@@ -92,7 +98,7 @@ Paramètres à renseigner :
 [ ] Set locale settings
 ```
 
-## 2.2 Depuis le terminal
+## 2.3. Depuis le terminal
 
 Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. 
 Tout d'abord, nous allons télécharger le fichier image de Raspberry Pi OS 
