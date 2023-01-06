@@ -9,7 +9,7 @@ unxz 2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
 
 # On montre les disques détéctés à l'utilisateur
 lsblk
-printf "Disque de la carte SD:"
+printf "Disque de la carte SD (sans le /dev/):"
 read -r sd
 
 # Ecriture de l'OS sur la carte SD
