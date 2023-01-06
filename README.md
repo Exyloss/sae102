@@ -484,11 +484,11 @@ Explication de la commande :
 La table de routage du serveur DHCP devrait ressembler à ceci :
 
 ```
-supervisor@ubuntu:~# ip route
-default via 10.2.18.1 dev ens3 proto static scope src 10.2.18.36 metric 100
-10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.36 metric 100
-10.2.18.36 dev ens4 proto static scope link metric 100
-192.168.36.0/24 dev ens4 proto kernel scope link src 192.168.36.1 metric 100
+supervisor@ubuntu2204:~$ ip route
+default via 10.2.18.1 dev ens3 proto static metric 20102 
+10.2.18.0/24 dev ens3 proto kernel scope link src 10.2.18.44 metric 102 
+10.2.18.36 dev ens4 proto static scope link metric 20103 
+192.168.36.0/24 dev ens4 proto kernel scope link src 192.168.36.1 metric 103
 ```
 
 Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer le service 
