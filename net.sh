@@ -17,7 +17,6 @@ nmcli con mod Connexion\ filaire\ 1 \
     ipv4.method manual
 nmcli con mod Connexion\ filaire\ 2 \
     ipv4.addresses "$ip_lan.1"/24 \
-    ipv4.gateway "$ip" \
     ipv4.dns "$dns" \
     ipv4.method manual
 

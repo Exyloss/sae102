@@ -233,7 +233,7 @@ Adresses
 
 |   Adresse   | Masque de réseau | Passerelle |
 |-------------+------------------+------------|
-|192.168.36.1 |255.255.255.0     |10.2.18.36  |
+|192.168.36.1 |255.255.255.0     |192.168.36.1|
 
 DNS
 
@@ -253,7 +253,7 @@ nmcli con mod Connexion\ filaire\ 1 ipv4.addresses 10.2.18.36/24 \
     ipv4.gateway 10.2.18.1 ipv4.dns 194.167.156.13 ipv4.method manual
 
 nmcli con mod Connexion\ filaire\ 2 ipv4.addresses 192.168.36.1/24 \
-    ipv4.gateway 10.2.18.36 ipv4.dns 194.167.156.13 ipv4.method manual
+    ipv4.dns 194.167.156.13 ipv4.method manual
 ```
 
 Ensuite, nous pouvons relancer ces connexions afin d'appliquer les changements effectués :
