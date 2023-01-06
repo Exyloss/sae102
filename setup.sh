@@ -23,7 +23,6 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
 # On redémarre les services pour être sûr que les configurations sont bien appliquées
-systemctl restart networking
-systemctl restart isc-dhcp-server
+systemctl restart networking isc-dhcp-server
 
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
