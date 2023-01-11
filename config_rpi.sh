@@ -17,9 +17,16 @@ echo "Ecriture de l'image sur la carte SD en cours..."
 sudo dd if=2022-09-22-raspios-bullseye-armhf-lite.img of=/dev/"$sd" bs=1M status=progress || exit 1
 
 # Montage de la carte SD
-[ -d /mnt ] || sudo mkdir /mnt
-sudo mount /dev/"$sd"2 /mnt || exit 1
-sudo mount /dev/"$sd"1 /mnt/boot || exit 1
+if grep -q "^/dev/$sd" /proc/mounts; then
+    echo "toast"
+    mpboot=$(grep "^/dev/${sd}1" /proc/mounts | cut -d ' ' -f 2)
+    mproot=$(grep "^/dev/${sd}2" /proc/mounts | cut -d ' ' -f 2)
+else
+    [ -d /mnt ] || sudo mkdir /mnt /mnt/boot
+fi
+
+sudo mount /dev/"$sd"2 "$mproot" || exit 1
+sudo mount /dev/"$sd"1 "$mpboot" || exit 1
 
 # Activation et configuration SSH
 sudo touch /mnt/boot/ssh
