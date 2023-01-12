@@ -1,34 +1,19 @@
 ---
-title: "Compte-rendu de la SAE-12"
+title: \Huge Compte-rendu de la SAE-1.02
 author: Antonin PONS
-date: 13 Décembre 2022
+date: 13 Décembre 2022 \pagebreak
 geometry: margin=2cm
+toc: true
+toc-title: Sommaire
 output: pdf_document
----
+fontsize: 5em
+lang: fr
+header-includes:
+  - \usepackage{titling}
+  - \setlength{\droptitle}{5cm} 
 ---
 
-# Sommaire
-
-1. Création de la VM
-2. Installation de Raspberry Pi OS
-    1. Montage de la carte sd sur la VM
-    2. En utilisant RPi-imager
-    3. Depuis le terminal
-3. Branchements réalisés
-4. Configuration basique de la VM
-    1. Paramétrage des cartes réseau
-        1. Avec RPi-imager
-        2. Depuis le terminal
-    2. Accès à internet depuis la VM
-5. Installation et configuration de DHCP
-    1. Installation
-    2. Configuration
-6. Récupération de l'addresse IP du Raspberry
-    1. Avec dhcpd.leases
-    2. Avec nmap
-    3. Avec fping
-7. Connexion SSH
-8. Accéder à internet depuis le Raspberry
+\vspace{2cm}
 
 ---
 
@@ -104,17 +89,6 @@ Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide 
 Tout d'abord, nous allons télécharger le fichier image de Raspberry Pi OS 
 [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
 with desktop».
-
-Pour vérifier l'intégrité du fichier téléchargé, nous pouvons 
-vérifier le hash d'intégrité du fichier téléchargé comme ceci :
-
-```
-supervisor@ubuntu:~/Téléchargements# sha256sum 2022-09-22-raspios-bullseye-armhf.img.xz
-4d8f38d014a807198996693b90cbeef94e19d9fd7fbefba7068db8df4d698cdd  2022-09-22-raspios-bullseye-armhf.img.xz
-```
-
-Ce hash est bien le même que celui présent sur le site de la fondation Raspberry Pi, le fichier est donc
-intègre.
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
@@ -511,29 +485,8 @@ HTTP est un succès, notre Raspberry Pi est donc bien connectée à internet.
 
 \pagebreak
 
-# Ressources utilisées
 
-[Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
-
-[Lire les baux des adresses IP](https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address)
-
-[Acceder à internet depuis le client](https://memo-linux.com/configurer-un-simple-petit-routeur-nat-sous-debian-jessie/)
-
-[Utiliser nmap](https://wiki.archlinux.org/title/Nmap)
-
-[Utiliser fping](https://fping.org/fping.1.html)
-
-[Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
-
-[Authentification SSH avec clef de chiffrement](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
-
-[Stockage des mots de passe dans le fichier /etc/shadow](https://unix.stackexchange.com/questions/557319/how-to-know-if-password-in-etc-shadow-is-hashed-with-sha-or-md)
-
-[Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
-
-[Utilité du salage des mots de passe](https://fr.wikipedia.org/wiki/Salage_(cryptographie))
-
-# Scripts écrits
+# 9. Scripts écrits
 
 ## 1. net.sh
 
@@ -572,6 +525,8 @@ export https_proxy=http://cache.univ-pau.fr:3128
 
 chmod +x setup.sh && sudo ./setup.sh "$ip_lan"
 ```
+
+\pagebreak
 
 ## 2. setup.sh
 
@@ -616,7 +571,8 @@ iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 
 if [ ! -e "2022-09-22-raspios-bullseye-armhf-lite.img" ]; then
     # Téléchargement de Raspberry Pi OS Lite
-    wget https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-09-26/2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
+    wget https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-09-26/\
+2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
     # Décrompression de l'image de l'OS
     echo "Décompression de l'image en cours..."
     unxz 2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
@@ -665,3 +621,27 @@ sudo sed -i "s|pi:\*:|pi:${pass_hash}:|g" /mnt/etc/shadow || exit 1
 sudo umount -R /mnt || exit 1
 echo "Installation terminée avec succès."
 ```
+
+\pagebreak
+
+# 10. Ressources utilisées
+
+[Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
+
+[Lire les baux des adresses IP](https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address)
+
+[Acceder à internet depuis le client](https://memo-linux.com/configurer-un-simple-petit-routeur-nat-sous-debian-jessie/)
+
+[Utiliser nmap](https://wiki.archlinux.org/title/Nmap)
+
+[Utiliser fping](https://fping.org/fping.1.html)
+
+[Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
+
+[Authentification SSH avec clef de chiffrement](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
+
+[Stockage des mots de passe dans le fichier /etc/shadow](https://unix.stackexchange.com/questions/557319/how-to-know-if-password-in-etc-shadow-is-hashed-with-sha-or-md)
+
+[Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
+
+[Utilité du salage des mots de passe](https://fr.wikipedia.org/wiki/Salage_(cryptographie))
