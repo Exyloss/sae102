@@ -532,3 +532,136 @@ HTTP est un succès, notre Raspberry Pi est donc bien connectée à internet.
 [Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
 
 [Utilité du salage des mots de passe](https://fr.wikipedia.org/wiki/Salage_(cryptographie))
+
+# Scripts écrits
+
+## 1. net.sh
+
+```bash
+#!/bin/sh
+
+printf 'Adresse IP du serveur (côté routeur):'
+read -r ip
+printf "\n3 premiers nombres de l'IP du serveur (côté réseau local):"
+read -r ip_lan
+printf '\nAdresse IP du routeur:'
+read -r routeur
+printf '\nAdresse IP du serveur DNS:'
+read -r dns
+
+# On configure les deux cartes réseau
+nmcli con mod Connexion\ filaire\ 1 \
+    ipv4.addresses "$ip"/24 \
+    ipv4.gateway "$routeur" \
+    ipv4.dns "$dns" \
+    ipv4.method manual
+nmcli con mod Connexion\ filaire\ 2 \
+    ipv4.addresses "$ip_lan.1"/24 \
+    ipv4.dns "$dns" \
+    ipv4.method manual
+
+# On relance les deux connexions
+nmcli con down Connexion\ filaire\ 1
+nmcli con up Connexion\ filaire\ 1
+nmcli con down Connexion\ filaire\ 2
+nmcli con up Connexion\ filaire\ 2
+
+# Exportation du proxy
+export http_proxy=http://cache.univ-pau.fr:3128
+export https_proxy=http://cache.univ-pau.fr:3128
+
+chmod +x setup.sh && sudo ./setup.sh "$ip_lan"
+```
+
+## 2. setup.sh
+
+```bash
+
+#!/bin/sh
+
+#/!\
+# Executer le script en tant que root : chmod +x setup.sh && sudo ./setup.sh ip_lan
+#/!\
+
+apt -y install --reinstall libappstream4
+apt -y update
+apt -y install isc-dhcp-server ssh nmap fping
+
+
+echo "INTERFACESv4='ens4'" > /etc/default/isc-dhcp-server
+
+printf "default-lease-time 600;\n\
+max-lease-time 7200;\n\
+subnet $1.0 netmask 255.255.255.0 {
+    range $1.2 $1.254;\n\
+    option routers $1.1;\n\
+    option domain-name-servers 194.167.156.13;\n\
+}\n" > /etc/dhcp/dhcpd.conf
+
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+
+# On redémarre les services pour être sûr que les configurations sont bien appliquées
+systemctl restart networking isc-dhcp-server
+
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+```
+
+\pagebreak
+
+## 3. config_rpi.sh
+
+```bash
+#!/bin/sh
+
+if [ ! -e "2022-09-22-raspios-bullseye-armhf-lite.img" ]; then
+    # Téléchargement de Raspberry Pi OS Lite
+    wget https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-09-26/2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
+    # Décrompression de l'image de l'OS
+    echo "Décompression de l'image en cours..."
+    unxz 2022-09-22-raspios-bullseye-armhf-lite.img.xz || exit 1
+fi
+
+# On montre les disques détéctés à l'utilisateur
+lsblk
+printf "Disque de la carte SD (sans le /dev/):"
+read -r sd
+
+if grep -q "^/dev/$sd" /proc/mounts; then
+    sudo umount /dev/"${sd}"* 2>/dev/null
+fi
+
+# Ecriture de l'OS sur la carte SD
+echo "Ecriture de l'image sur la carte SD en cours, ne pas interrompre le programme..."
+sudo dd if=2022-09-22-raspios-bullseye-armhf-lite.img of=/dev/"$sd" bs=1M status=progress || exit 1
+
+# Montage de la carte SD
+[ -d /mnt ] || sudo mkdir /mnt /mnt/boot
+sudo mount /dev/"$sd"2 /mnt || exit 1
+sudo mount /dev/"$sd"1 /mnt/boot || exit 1
+
+# Activation et configuration SSH
+sudo touch /mnt/boot/ssh
+echo "PermitRootLogin no" | sudo tee -a /mnt/etc/ssh/sshd_config || exit 1
+
+# Mise à jour d'openssl
+printf "Souhaitez-vous mettre à jour OpenSSL ? [O/n] "
+read -r confirm
+if [ "$confirm" = "o" ] || [ "$confirm" = "O" ]; then
+    distro=$(grep "^ID=" /etc/os-release | cut -d '=' -f 2 )
+    case "$distro" in
+        "ubuntu"|"debian") sudo apt -y install openssl || exit 1 ;;
+        "arch") sudo pacman -Sy openssl ;;
+    esac
+else
+    echo "OpenSSL ne sera pas mit à jour"
+fi
+# Configuration mot de passe pi
+echo "Veuillez rentrer le mot de passe de l'utilisateur pi"
+pass_hash=$(openssl passwd -6) || exit 1
+sudo sed -i "s|pi:\*:|pi:${pass_hash}:|g" /mnt/etc/shadow || exit 1
+
+# Démontage de la carte
+sudo umount -R /mnt || exit 1
+echo "Installation terminée avec succès."
+```
