@@ -88,7 +88,9 @@ Paramètres à renseigner :
 Pour cette partie, nous installerons et configurerons Raspberry Pi OS à l'aide d'un terminal. 
 Tout d'abord, nous allons télécharger le fichier image de Raspberry Pi OS 
 [ici](https://www.raspberrypi.com/software/operating-systems/) en sélectionnant «Raspberry Pi OS 
-with desktop».
+with desktop» ou «Raspberry Pi OS Lite».
+
+\pagebreak
 
 Ensuite,
 nous devons décompresser ce fichier, pour ce faire nous allons utiliser le programme `unxz` en lui
@@ -167,7 +169,7 @@ sudo umount /media/supervisor/*
 
 Les câbles verts représentent les connexions préétablies.
 
-![schéma des branchements réalisés](img/dessin.jpg)
+![schéma des branchements réalisés](img/dessin.png)
 
 # 4. Configuration basique de la VM
 
@@ -199,6 +201,8 @@ La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance
 pas au réseau 10.2.18.0. Aussi, cette carte
 n'a pas besoin de passerelle, elle sera réliée à la carte bridge1 par l'intermédiaire de l'ip_forward.
 Son masque et son DNS sont les mêmes que ceux de bridge1.
+
+\pagebreak
 
 ```
 Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
@@ -320,7 +324,7 @@ sudo systemctl enable --now isc-dhcp-server.service
 
 ## 6.1. Avec dhcpd.leases
 
-Après avoir brancher le Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
+Après avoir branché le Raspberry, il existe plusieurs méthodes pour récupérer son adresse ip.
 Nous pouvons la récupérer à l'aide du fichier des baux généré par `isc-dhcp-server`.
 Ce fichier est _/var/lib/dhcpd.leases_ et ressemble à ceci :
 
