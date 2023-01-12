@@ -10,7 +10,7 @@ fontsize: 5em
 lang: fr
 header-includes:
   - \usepackage{titling}
-  - \setlength{\droptitle}{5cm} 
+  - \setlength{\droptitle}{7cm} 
 ---
 
 \vspace{2cm}
@@ -477,11 +477,12 @@ Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer l
 sudo systemctl restart NetworkManager
 ```
 
-Depuis la connexion SSH, nous devons aussi exporter le proxy de l'IUT sur le Raspberry afin de
-pouvoir émettre des requêtes HTTP.
+Notre Raspberry peut alors pinguer un serveur distant, mais celui-ci ne peut pas émettre de requêtes HTTP en dehors du réseau de l'IUT.
+
+Depuis la connexion SSH, nous devons alors exporter le proxy de l'IUT sur le Raspberry.
 
 De plus, afin d'avoir des certificats SSL synchronisés à l'heure actuelle, nous devons mettre à jour
-la date du Raspberry comme ceci:
+la date et l'heure système du Raspberry comme ceci:
 
 ```bash
 sudo date -s '2023-01-13 23:59:00'
@@ -489,7 +490,7 @@ sudo date -s '2023-01-13 23:59:00'
 
 Cette commande définira la date au Vendredi 13 Janvier 2023 et l'heure à 23h59.
 
-Normalement, le Raspberry devrait avoir accès à internet. Pour tester la connexion, nous pouvons 
+. Pour tester la connexion avec internet en HTTP, nous pouvons 
 tenter de faire une requête HTTP au site web _archlinux.org_ :
 
 ```bash
