@@ -161,9 +161,9 @@ enfin, nous pouvons démonter la carte SD du répertoire /media/supervisor :
 sudo umount /media/supervisor/*
 ```
 
-Note : le -R permet de démonter la carte SD récursivement.
+\pagebreak
 
-# 3. Branchements réalisés
+# 3. Branchements efféctués
 
 Les câbles verts représentent les connexions préétablies.
 
@@ -195,9 +195,10 @@ DNS
 [194.167.156.13]
 ```
 
-La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance. Sa passerelle 
-sera 10.2.18.36 afin que celle-ci soit reliée à internet. Son masque et son DNS sont les mêmes 
-que ceux de bridge1.
+La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance, il faut simplement qu'elle n'appartienne
+pas à l'adresse réseau 10.2.18.0. Aussi, cette carte
+n'a pas besoin de passerelle, elle sera réliée à la carte bridge1 par l'intermédiaire de l'ip_forward.
+Son masque et son DNS sont les mêmes que ceux de bridge1.
 
 ```
 Méthode IPv4    ( ) Automatique (DHCP)  ( ) Réseau local seulement
@@ -207,7 +208,7 @@ Adresses
 
 |   Adresse   | Masque de réseau | Passerelle |
 |-------------+------------------+------------|
-|192.168.36.1 |255.255.255.0     |192.168.36.1|
+|192.168.36.1 |255.255.255.0     |            |
 
 DNS
 
@@ -466,13 +467,13 @@ default via 10.2.18.1 dev ens3 proto static metric 20102
 ```
 
 Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer le service 
-`networking` :
+`NetworkManager` :
 
 ```bash
-sudo systemctl restart networking
+sudo systemctl restart NetworkManager
 ```
 
-Normalement, le Raspberry devrait avoir accès à internet. Pour tester la connection, nous pouvons 
+Normalement, le Raspberry devrait avoir accès à internet. Pour tester la connexion, nous pouvons 
 tenter de faire une requête HTTP au site web _archlinux.org_ :
 
 ```bash
@@ -557,7 +558,7 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
 # On redémarre les services pour être sûr que les configurations sont bien appliquées
-systemctl restart networking isc-dhcp-server
+systemctl restart NetworkManager isc-dhcp-server
 
 iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
 ```
