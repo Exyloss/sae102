@@ -196,7 +196,7 @@ DNS
 ```
 
 La carte PASS1 aura comme adresse ip 192.168.36.1, celle-ci n'a pas d'importance, il faut simplement qu'elle n'appartienne
-pas à l'adresse réseau 10.2.18.0. Aussi, cette carte
+pas au réseau 10.2.18.0. Aussi, cette carte
 n'a pas besoin de passerelle, elle sera réliée à la carte bridge1 par l'intermédiaire de l'ip_forward.
 Son masque et son DNS sont les mêmes que ceux de bridge1.
 
@@ -452,7 +452,7 @@ Explication de la commande :
  - L'algorithme _MASQUERADE_ de l'option -j permet à la passerelle de se souvenir des paquets 
      tranférés et de les modifier afin de changer leur IP source lors de leur envoi.
      Lors du retour du paquet, cet algorithme consulte sa table des connexions masquées 
-     établies pour voir si le datagramme appartient affectivement
+     établies pour voir si le datagramme appartient effectivement
      à un appareil du réseau local. Si c'est le cas, il annule les modifications réalisées à 
      l'aller du datagramme et le transmet au réseau local.
 
@@ -473,6 +473,18 @@ Enfin, afin de mettre à jour les interfaces réseau, il suffit de redémarrer l
 sudo systemctl restart NetworkManager
 ```
 
+Depuis la connexion SSH, nous devons aussi exporter le proxy de l'IUT sur le Raspberry afin de
+pouvoir émettre des requêtes HTTP.
+
+De plus, afin d'avoir des certificats SSL synchronisés à l'heure actuelle, nous devons mettre à jour
+la date du Raspberry comme ceci:
+
+```bash
+sudo date -s '2023-01-13 23:59:00'
+```
+
+Cette commande définira la date au Vendredi 13 Janvier 2023 et l'heure à 23h59.
+
 Normalement, le Raspberry devrait avoir accès à internet. Pour tester la connexion, nous pouvons 
 tenter de faire une requête HTTP au site web _archlinux.org_ :
 
@@ -482,7 +494,7 @@ curl -I https://archlinux.org/
 
 Cette commande nous retourne l'en-tête HTTP de la réponse du serveur web _archlinux.org:443_.
 Dans cet en-tête, on y lit en première ligne _HTTP/2 200_, le code 200 signifie que la requête 
-HTTP est un succès, notre Raspberry Pi est donc bien connectée à internet.
+HTTP est un succès, notre Raspberry Pi est donc bien connecté à internet, en plus de pouvoir émettre des requêtes HTTP.
 
 \pagebreak
 
@@ -629,7 +641,7 @@ echo "Installation terminée avec succès."
 
 [Documentation Ubuntu isc-dhcp-server](https://doc.ubuntu-fr.org/isc-dhcp-server)
 
-[Lire les baux des adresses IP](https://askubuntu.com/questions/265504/how-to-monitor-dhcp-leased-ip-address)
+[Lire les baux des adresses IP](https://doc.ubuntu-fr.org/isc-dhcp-server#baux_leases)
 
 [Acceder à internet depuis le client](https://memo-linux.com/configurer-un-simple-petit-routeur-nat-sous-debian-jessie/)
 
@@ -639,10 +651,6 @@ echo "Installation terminée avec succès."
 
 [Configuration des cartes réseau avec nmcli](https://www.tecmint.com/nmcli-configure-network-connection/)
 
-[Authentification SSH avec clef de chiffrement](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
-
 [Stockage des mots de passe dans le fichier /etc/shadow](https://unix.stackexchange.com/questions/557319/how-to-know-if-password-in-etc-shadow-is-hashed-with-sha-or-md)
 
 [Génération des mots de passe avec OpenSSL](https://www.openssl.org/docs/man3.1/man1/openssl-passwd.html)
-
-[Utilité du salage des mots de passe](https://fr.wikipedia.org/wiki/Salage_(cryptographie))
