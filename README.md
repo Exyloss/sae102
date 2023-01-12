@@ -255,20 +255,20 @@ export http_proxy="http://cache.univ-pau.fr:3128"
 export https_proxy="http://cache.univ-pau.fr:3128"
 ```
 
-On peut vérifier le fonctionnement de notre configuration en pingant par exemple _archlinux.org_
-en IPv4 :
+On peut vérifier le fonctionnement de notre configuration en envoyant une requête HTTP
+au serveur archlinux.org :
 
 ```bash
-ping -4 archlinux.org
+wget https://archlinux.org
 ```
 
 # 5. Installation et configuration de DHCP
 
 ## 5.1. Installation
 
-Avant de pouvoir installer DHCP, nous avons fait face à une erreur du gestionnaire de paquets 
-d'ubuntu (voir figure en fin de partie). Après quelques recherches, nous résolûmes cette erreur en
-rentrant la commande suivante :
+Avant de pouvoir installer DHCP, j'ai fait face à une erreur du gestionnaire de paquets 
+d'Ubuntu 18.04 (voir figure en fin de partie). Après quelques recherches, cette erreur fut
+résolue en rentrant la commande suivante :
 
 ```bash
 sudo apt install --reinstall libappstream4
